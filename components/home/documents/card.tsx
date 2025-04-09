@@ -4,14 +4,14 @@ import { FileIcon, Download, Eye } from "lucide-react"
 import Image from "next/image"
 
 interface PdfCardProps {
+    id: string
     title: string
-    fichier: string
     dateAdded: string
     url: string
     description?: string
 }
 
-export default function PdfCard({ title, fichier, dateAdded, url, description }: PdfCardProps) {
+export default function PdfCard({ id, title, dateAdded, url, description }: PdfCardProps) {
     return (
         <Card className="max-w-md overflow-hidden transition-all hover:shadow-md">
             <CardHeader className="flex flex-row items-center gap-4 pb-2">
@@ -26,21 +26,17 @@ export default function PdfCard({ title, fichier, dateAdded, url, description }:
                 </div>
             </CardHeader>
 
-            {description && (
-                <CardContent className="pb-2">
-                    <p className="text-sm text-muted-foreground line-clamp-2">{description}</p>
-                </CardContent>
-            )}
+
 
             <CardFooter className="flex justify-between pt-2">
                 <Button variant="outline" size="sm" asChild>
-                    <a href={url} target="_blank" rel="noopener noreferrer">
+                    <a href={`/ressources/${id}`} target="_blank" rel="noopener noreferrer">
                         <Eye className="mr-2 h-4 w-4" />
                         Visualiser
                     </a>
                 </Button>
                 <Button variant="default" size="sm" asChild>
-                    <a href={fichier} download>
+                    <a href={url} download>
                         <Download className="mr-2 h-4 w-4" />
                         Télécharger
                     </a>

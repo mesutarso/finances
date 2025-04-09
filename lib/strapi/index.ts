@@ -2,21 +2,21 @@ import { strapi } from "@strapi/client";
 
 const client = strapi({
   baseURL: process.env.API_URL!,
-  auth: process.env.TOKEN!,
+  auth: process.env.NEXT_PUBLIC_TOKEN,
 });
 
-const articles = await client.collection("articles");
-const services = await client.collection("services");
-const documents = await client.collection("documents");
-const categories = await client.collection("categories");
-const ressources = await client.collection("ressources");
-const types = await client.collection("types");
-const categoriesDocuments = await client.collection("categorie-documents");
-const ministre = await client.single("ministre");
-const viceMinistre = await client.single("vice-ministre");
-const cabinet = await client.single("cabinet");
-const texteFondateur = await client.single("texte-fondateur");
-const anciensMinistres = await client.collection("ancien-ministre");
+const articles = client.collection("articles");
+const services = client.collection("services");
+const documents = client.collection("documents");
+const categories = client.collection("categories");
+const ressources = client.collection("ressources");
+const types = client.collection("types");
+const categoriesDocuments = client.collection("categorie-documents");
+const ministre = client.single("ministre");
+const viceMinistre = client.single("vice-ministre");
+const cabinet = client.single("cabinet");
+const texteFondateur = client.single("texte-fondateur");
+const anciensMinistres = client.single("ancien-ministre");
 
 export {
   articles,

@@ -2,6 +2,8 @@
 
 import { types, categoriesDocuments, ressources } from "@/lib/strapi";
 import { DocumentFilters } from "@/types/documents";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 
 interface DocumentsParams {
   page: number;
@@ -124,4 +126,21 @@ export const fetchDocument = async (id: string) => {
     categories: data.types[0]["categorie_document"]?.nom,
     date_publication: data.date_publication,
   };
+};
+
+export const fetchLatestDocuments = async () => {
+  const { data } = await ressources.find({
+    populate: ["fichier"],
+    pagination: {
+      pageSize: 6,
+    },
+  });
+  return data?.map((item: any) => ({
+    id: item.documentId,
+    title: item.titre,
+    dateAdded: format(new Date(item.date_publication), "dd MMMM yyyy", {
+      locale: fr,
+    }),
+    url: `${process.env.IMAGE_URL}${item.fichier?.url}`,
+  }));
 };
