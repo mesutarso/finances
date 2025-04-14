@@ -61,5 +61,13 @@ export const getAnciensMinistres = async () => {
     populate: ["ministres.portrait"],
   });
   //@ts-ignore
-  return data?.ministres?.sort((a, b) => new Date(b.ordre) - new Date(a.ordre));
+  const sortedMinistres = data?.ministres?.sort(
+    (a, b) => new Date(b.ordre) - new Date(a.ordre)
+  );
+  return sortedMinistres.map((ministre: any) => ({
+    ...ministre,
+    portrait: ministre.portrait?.url
+      ? `${process.env.IMAGE_URL}${ministre.portrait?.url}`
+      : null,
+  }));
 };

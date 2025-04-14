@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { anciensMinistresQuery } from '@/lib/react-query/ministere/options'
 import { motion } from 'motion/react'
 import Image from 'next/image'
@@ -12,7 +12,7 @@ interface AncienMinistre {
 }
 
 function AnciensMinistresContent() {
-    const { data } = useSuspenseQuery(anciensMinistresQuery)
+    const { data } = useQuery(anciensMinistresQuery)
     const [searchTerm, setSearchTerm] = useState('')
 
     const filteredData = data?.filter((ministre: AncienMinistre) =>
@@ -31,6 +31,7 @@ function AnciensMinistresContent() {
                 />
             </div>
 
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filteredData?.map((ministre: AncienMinistre, index: number) => (
                     <motion.div
@@ -47,6 +48,11 @@ function AnciensMinistresContent() {
                                 fill
                                 className="object-cover"
                             />
+
+
+
+
+
                         </div>
                         <div className="p-6">
                             <h3 className="text-xl font-bold text-gray-800 mb-2">{ministre.noms}</h3>
