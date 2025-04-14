@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Textes Fondateurs",
 }
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function TextesFondateurs() {
   const queryClient = getQueryClient();
