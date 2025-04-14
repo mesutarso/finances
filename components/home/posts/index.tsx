@@ -13,7 +13,7 @@ function HomePosts() {
 
             <Heading title="À la une" color="blue" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {articles.map((article) => (
+                {articles?.map((article: any) => (
                     <PostCard key={article.link} {...article} />
                 ))}
             </div>

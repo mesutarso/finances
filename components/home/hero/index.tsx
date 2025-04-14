@@ -87,7 +87,7 @@ export default function Home() {
     return (
         <section id="hero">
             <div className="relative min-h-[600px] w-full overflow-hidden">
-                {slides.map((slide, index) => (
+                {slides?.map((slide: any, index: number) => (
                     <div
                         key={slide.id}
                         className={`absolute  inset-0 ${index === current ? "" : "pointer-events-none"}`}
@@ -167,7 +167,7 @@ export default function Home() {
 
                 {/* Indicators */}
                 <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-2">
-                    {slides.map((_, index) => (
+                    {slides?.map((_: any, index: number) => (
                         <button
                             key={index}
                             onClick={() => setCurrent(index)}
