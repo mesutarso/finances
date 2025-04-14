@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     description: "Le site officiel du Ministre des Finances de la République Démocratique du Congo",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Ministre() {
     const queryClient = getQueryClient();
     await queryClient.prefetchQuery(ministreQuery);

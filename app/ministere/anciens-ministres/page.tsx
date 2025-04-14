@@ -3,7 +3,14 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { anciensMinistresQuery } from "@/lib/react-query/ministere/options";
 import { getQueryClient } from "@/components/providers/react-query/client";
 import AnciensMinistresContent from "@/components/ministere/anciens-ministres";
+import { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+    title: "Anciens Ministres des Finances",
+    description: "Anciens Ministres des Finances",
+}
 
 async function AnciensMinistres() {
     const queryClient = getQueryClient();
