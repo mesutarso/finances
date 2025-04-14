@@ -3,6 +3,14 @@ import Line from '@/components/shared/line'
 import { allServicesQuery } from "@/lib/react-query/services/options";
 import { getQueryClient } from "@/components/providers/react-query/client";
 import ServicesContent from "@/components/home/services/content";
+import { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+    title: "Services | Ministère des Finances",
+    description: "Services",
+}
 
 function Services() {
     const queryClient = getQueryClient();

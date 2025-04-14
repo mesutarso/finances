@@ -12,6 +12,8 @@ type ArticleDetailProps = {
     }>
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(
     { params }: ArticleDetailProps,
     parent: ResolvingMetadata

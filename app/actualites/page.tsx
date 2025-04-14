@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     description: "Les dernières actualités du Ministère des Finances de la République Démocratique du Congo",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Actualites() {
     const queryClient = getQueryClient();
     await queryClient.prefetchQuery(getAllArticlesQuery(1, 10, ''));
