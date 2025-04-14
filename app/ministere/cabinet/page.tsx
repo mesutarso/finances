@@ -3,6 +3,14 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { cabinetQuery } from "@/lib/react-query/ministere/options"
 import { getQueryClient } from "@/components/providers/react-query/client";
 import CabinetContent from '@/components/ministere/cabinet'
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Cabinet du Ministre des Finances",
+    description: "Cabinet du Ministre des Finances",
+}
+
+export const revalidate = 3600;
 
 export default async function Cabinet() {
     const queryClient = getQueryClient();

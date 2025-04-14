@@ -32,7 +32,7 @@ function AnciensMinistresContent() {
             </div>
 
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 {filteredData?.map((ministre: AncienMinistre, index: number) => (
                     <motion.div
                         key={index}
@@ -54,9 +54,9 @@ function AnciensMinistresContent() {
 
 
                         </div>
-                        <div className="p-6">
-                            <h3 className="text-xl font-bold text-gray-800 mb-2">{ministre.noms}</h3>
-                            <p className="text-gray-600">{ministre.periode}</p>
+                        <div className="p-6 text-center">
+                            <h3 className="text-md font-bold text-gray-800 mb-2">{ministre.noms}</h3>
+                            <p className="text-gray-600 text-xs">{ministre.periode}</p>
                         </div>
                     </motion.div>
                 ))}
