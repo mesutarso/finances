@@ -15,3 +15,14 @@ export function formatDate(dateString: string): string {
     return "-";
   }
 }
+
+export function formatCategorie(categorie: string): string {
+  const data = {
+    "calendrier-des-emissions": "Calendrier des émissions",
+    "annonces-et-resultats": "Annonces et résultats",
+    communiques: "Communiqués",
+    "autres-publications": "Autres publications",
+  };
+
+  return data[categorie as keyof typeof data] || categorie;
+}

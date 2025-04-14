@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useLayoutEffect, useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { fetchDocuments } from "@/actions/documents"
 import { DocumentsTable } from "./table"
@@ -13,22 +13,32 @@ import { Button } from "@/components/ui/button"
 import { SearchIcon, FilterIcon } from "lucide-react"
 import type { DocumentFilters } from "@/types/documents"
 
-export function DocumentsDataTable() {
+export function DocumentsDataTable({ categorie }: { categorie: string }) {
     const [page, setPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
     const [search, setSearch] = useState("")
     const [filters, setFilters] = useState<DocumentFilters>({
-        type: null,
+        type: categorie ? categorie : categorie === "Autres publications" ? null : null,
         category: null,
         dateFrom: null,
         dateTo: null,
     })
     const [showFilters, setShowFilters] = useState(false)
 
+    // Mettre à jour les filtres lorsque la catégorie change
+    useEffect(() => {
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            type: categorie ? categorie : categorie === "Autres publications" ? null : null
+        }));
+        setPage(1); // Réinitialiser à la première page
+    }, [categorie]);
+
     // Query Strapi for documents with pagination and filters
     const { data, isLoading, isError } = useQuery({
         queryKey: ["documents", page, pageSize, search, filters],
         queryFn: () => fetchDocuments({ page, pageSize, search, filters }),
+        enabled: !!categorie,
     })
 
     const documents = data?.data || []

@@ -67,8 +67,8 @@ export const fetchDocuments = async ({
     queryParams.filters = {
       ...(queryParams.filters || {}),
       types: {
-        documentId: {
-          $eq: filters.type,
+        titre: {
+          $in: filters.type,
         },
       },
     };
