@@ -4,7 +4,7 @@ import { INSTITUTIONNELS } from '@/lib/constants'
 function Institutionnels() {
     return (
         <div>
-            <h3 className="text-lg font-bold mb-4">Institutionnels</h3>
+            <h3 className="text-lg font-bold mb-4">Sites institutionnels</h3>
             <ul className="flex flex-col gap-2">
                 {INSTITUTIONNELS.map((link) => (
                     <li key={link.label}>

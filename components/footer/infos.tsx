@@ -10,7 +10,7 @@ function Infos() {
                 <p>
                     Centre Financier de Kinshasa
                     <br />
-                    Kinshasa, RDC
+                    1 Zongotolo, Kinshasa - Gombe, RDC
                 </p>
                 <div className="flex flex-col gap-2">
                     <p className="flex items-center gap-2">
@@ -19,7 +19,7 @@ function Infos() {
                     </p>
                     <p className="flex items-center gap-2">
                         <Mail className="w-4 h-4" />
-                        contact@finances.gouv.cd
+                        cabinet@finances.gouv.cd
                     </p>
                 </div>
             </div>

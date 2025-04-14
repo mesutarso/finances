@@ -7,7 +7,7 @@ function Footer() {
     return (
         <>
             <Line />
-            <footer className="bg-blue-dark  text-white">
+            <footer className="bg-primary  text-white">
                 <div className="container section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
                     <Infos />
                     <Useful />

@@ -19,7 +19,7 @@ export default function PdfCard({ id, title, dateAdded, url, description }: PdfC
                     <Image src={'/folder.svg'} alt={title} width={48} height={48} />
                 </div>
                 <div>
-                    <CardTitle className="line-clamp-1 text-lg">{title}</CardTitle>
+                    <CardTitle className="line-clamp-3 text-lg">{title}</CardTitle>
                     <p className="text-sm text-muted-foreground">
                         Ajouté le {dateAdded}
                     </p>
