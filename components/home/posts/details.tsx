@@ -1,7 +1,7 @@
 'use client'
 import { CalendarIcon, ClockIcon, TagIcon, User } from "lucide-react"
 import Image from "next/image"
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { articleBySlugQuery } from "@/lib/react-query/articles/options"
 import { notFound } from "next/navigation"
 import ShareButtons from "@/components/shared/share-buttons"
@@ -12,7 +12,7 @@ type PostDetailsProps = {
 }
 
 function PostDetails({ slug }: PostDetailsProps) {
-    const { data } = useSuspenseQuery(articleBySlugQuery(slug))
+    const { data } = useQuery(articleBySlugQuery(slug))
     if (!data) {
         notFound()
     }

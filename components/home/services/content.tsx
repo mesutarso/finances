@@ -1,12 +1,12 @@
 'use client'
 import { useState, useEffect } from "react";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { allServicesQuery } from "@/lib/react-query/services/options";
 import ServiceCard from "./card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function ServicesContent() {
-    const { data: services } = useSuspenseQuery(allServicesQuery);
+    const { data: services } = useQuery(allServicesQuery);
     const [searchTerm, setSearchTerm] = useState("");
     const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
     const [isSearching, setIsSearching] = useState(false);

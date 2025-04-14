@@ -3,11 +3,11 @@ import Heading from "@/components/shared/heading"
 import ServiceCard from "./card"
 import { Button } from "@/components/ui/button"
 import { Link } from "next-view-transitions"
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { latestServicesQuery } from "@/lib/react-query/services/options";
 
 function HomeServices() {
-    const { data: services } = useSuspenseQuery(latestServicesQuery);
+    const { data: services } = useQuery(latestServicesQuery);
     return (
         <section className="bg-gray-50">
             <div className="container section space-y-8">

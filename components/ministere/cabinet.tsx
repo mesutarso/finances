@@ -1,10 +1,10 @@
 'use client'
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { cabinetQuery } from '@/lib/react-query/ministere/options';
 import { CabinetSection } from './cabinet-section';
 
 function CabinetContent() {
-    const { data } = useSuspenseQuery(cabinetQuery);
+    const { data } = useQuery(cabinetQuery);
     return (
         <div>
 

@@ -4,10 +4,10 @@ import PostCard from "./card"
 
 import { Button } from "@/components/ui/button"
 import { Link } from 'next-view-transitions'
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { latestArticlesQuery } from "@/lib/react-query/articles/options";
 function HomePosts() {
-    const { data: articles } = useSuspenseQuery(latestArticlesQuery);
+    const { data: articles } = useQuery(latestArticlesQuery);
     return (
         <div className="container section space-y-8">
 

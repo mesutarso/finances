@@ -2,12 +2,12 @@
 
 import { FaLinkedin, FaXTwitter, FaFacebook, FaInstagram, FaWikipediaW } from 'react-icons/fa6'
 import { Card, CardContent } from '../ui/card'
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { viceMinistreQuery } from '@/lib/react-query/ministere/options'
 import Image from 'next/image'
 
 function ViceMinistreContent() {
-    const { data } = useSuspenseQuery(viceMinistreQuery);
+    const { data } = useQuery(viceMinistreQuery);
 
     const socials = {
         linkedin: <FaLinkedin className="text-3xl" />,

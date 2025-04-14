@@ -5,12 +5,12 @@ import { Link } from 'next-view-transitions'
 import React from 'react'
 import { Button } from '../ui/button'
 import { Card, CardContent } from '../ui/card'
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { ministreQuery } from '@/lib/react-query/ministere/options'
 import Image from 'next/image'
 
 function MinistreContent() {
-    const { data } = useSuspenseQuery(ministreQuery);
+    const { data } = useQuery(ministreQuery);
 
     const socials = {
         linkedin: <FaLinkedin className="text-3xl" />,
