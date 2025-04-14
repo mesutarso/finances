@@ -138,5 +138,10 @@ export const getArticleSlugs = async () => {
       pageSize: 50,
     },
   });
-  return slugs?.data?.map((item: any) => item.slug);
+  return slugs?.data?.map((item: any) => {
+    return {
+      slug: item.slug,
+      date: new Date(),
+    };
+  });
 };

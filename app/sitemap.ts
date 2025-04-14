@@ -1,14 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getArticleSlugs } from "@/actions/articles";
 
-async function getArticles() {
-  const slugs = await getArticleSlugs();
-  return slugs.map((slug) => ({
-    slug,
-    date: new Date(),
-  }));
-}
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://finances.gouv.cd";
 
@@ -69,9 +61,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const articles = await getArticles();
+  const articles = await getArticleSlugs();
 
-  const articleRoutes = articles.map((article) => ({
+  const articleRoutes = articles.map((article: any) => ({
     url: `${baseUrl}/articles/${article.slug}`,
     lastModified: article.date,
     changeFrequency: "weekly" as const,
