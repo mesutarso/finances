@@ -62,7 +62,7 @@ export const getAnciensMinistres = async () => {
   });
   //@ts-ignore
   const sortedMinistres = data?.ministres?.sort(
-    (a, b) => new Date(b.ordre) - new Date(a.ordre)
+    (a: any, b: any) => b.ordre - a.ordre
   );
   return sortedMinistres.map((ministre: any) => ({
     ...ministre,
