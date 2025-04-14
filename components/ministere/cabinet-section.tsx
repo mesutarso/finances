@@ -54,9 +54,9 @@ export function CabinetSection({ title, members, level, className = "" }: Cabine
                 initial="hidden"
                 animate="show"
             >
-                {members.map((member, index) => (
+                {members.map((member: any, index: number) => (
                     <motion.div key={index} variants={item}>
-                        <MemberCard name={member.noms} role={member.fonction} image={member?.portrait || "/default.png"} level={level} />
+                        <MemberCard name={member?.noms} role={member?.fonction} image={member?.portrait || "/default.png"} level={level} />
                     </motion.div>
                 ))}
             </motion.div>
