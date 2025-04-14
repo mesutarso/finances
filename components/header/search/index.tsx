@@ -86,7 +86,7 @@ export function SearchDialog() {
 
             {filteredResults.articles.length > 0 && (
                 <CommandGroup heading="Articles récents">
-                    {filteredResults.articles.map((article) => (
+                    {filteredResults?.articles?.map((article: any) => (
                         <CommandItem
                             key={`recent-article-${article.id}`}
                             onSelect={() => setOpen(false)}
@@ -103,7 +103,7 @@ export function SearchDialog() {
 
             {filteredResults.documents.length > 0 && (
                 <CommandGroup heading="Documents récents">
-                    {filteredResults.documents.map((document) => (
+                    {filteredResults?.documents?.map((document: any) => (
                         <CommandItem
                             key={`recent-document-${document.id}`}
                             onSelect={() => setOpen(false)}
@@ -120,7 +120,7 @@ export function SearchDialog() {
 
             {filteredResults.services.length > 0 && (
                 <CommandGroup heading="Services récents">
-                    {filteredResults.services.map((service) => (
+                    {filteredResults?.services?.map((service: any) => (
                         <CommandItem
                             key={`recent-service-${service.id}`}
                             onSelect={() => setOpen(false)}
@@ -137,7 +137,7 @@ export function SearchDialog() {
                 <>
 
                     <CommandGroup heading="Résultats de recherche (articles)">
-                        {apiResults?.formattedArticles.map((article) => (
+                        {apiResults?.formattedArticles?.map((article: any) => (
                             <CommandItem
                                 key={article.id}
                                 onSelect={() => setOpen(false)}
@@ -152,7 +152,7 @@ export function SearchDialog() {
 
 
                     <CommandGroup heading="Résultats de recherche (documents)">
-                        {apiResults?.formattedDocuments.map((document) => (
+                        {apiResults?.formattedDocuments?.map((document: any) => (
                             <CommandItem
                                 key={document.id}
                                 onSelect={() => setOpen(false)}
@@ -167,7 +167,7 @@ export function SearchDialog() {
 
 
                     <CommandGroup heading="Résultats de recherche (services)">
-                        {apiResults?.formattedServices.map((service) => (
+                        {apiResults?.formattedServices?.map((service: any) => (
                             <CommandItem
                                 key={service.id}
                                 onSelect={() => setOpen(false)}

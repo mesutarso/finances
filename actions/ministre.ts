@@ -64,7 +64,7 @@ export const getAnciensMinistres = async () => {
   const sortedMinistres = data?.ministres?.sort(
     (a: any, b: any) => b.ordre - a.ordre
   );
-  return sortedMinistres.map((ministre: any) => ({
+  return sortedMinistres?.map((ministre: any) => ({
     ...ministre,
     portrait: ministre.portrait?.url
       ? `${process.env.IMAGE_URL}${ministre.portrait?.url}`
