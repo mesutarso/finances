@@ -15,7 +15,7 @@ function Footer() {
                     <Institutionnels />
                 </div>
                 <div className="flex flex-col items-center justify-center py-5">
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-white">
                         Ministère des Finances  &copy; {new Date().getFullYear()} - Tous droits réservés
                     </p>
                 </div>
