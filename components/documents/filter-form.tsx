@@ -28,26 +28,16 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
         queryFn: fetchDocumentTypes,
     })
 
-    const { data: categories } = useQuery({
-        queryKey: ["documentCategories", localFilters.type],
-        queryFn: () => fetchDocumentCategories(localFilters.type),
-        enabled: !!localFilters.type,
-    })
+
 
     const handleTypeChange = (value: string | null) => {
         setLocalFilters((prev) => ({
             ...prev,
             type: value,
-            category: null,
+
         }))
     }
 
-    const handleCategoryChange = (value: string | null) => {
-        setLocalFilters((prev) => ({
-            ...prev,
-            category: value,
-        }))
-    }
 
     const handleDateFromChange = (date: Date | null) => {
         setLocalFilters((prev) => ({
@@ -70,7 +60,6 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
     const resetFilters = () => {
         const resetFilters = {
             type: null,
-            category: null,
             dateFrom: null,
             dateTo: null,
         }
@@ -80,17 +69,17 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
 
     return (
         <div className="rounded-md border p-4 bg-primary text-white space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
                 <div className="space-y-2">
                     <label className="text-sm font-medium">Type de document</label>
                     <Select value={localFilters.type || ""} onValueChange={(value) => handleTypeChange(value || null)}>
-                        <SelectTrigger className="w-full bg-white text-black">
-                            <SelectValue placeholder="Tous les types" />
+                        <SelectTrigger className="w-full bg-white  text-black">
+                            <SelectValue className="text-black" placeholder="Tous les types" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">Tous les types</SelectItem>
                             {types?.map((type: { id: string; nom: string }) => (
-                                <SelectItem key={type.id} value={type.id}>
+                                <SelectItem key={type.id} value={type.nom}>
                                     {type.nom}
                                 </SelectItem>
                             ))}
@@ -98,26 +87,7 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
                     </Select>
                 </div>
 
-                <div className="space-y-2">
-                    <label className="text-sm font-medium">Catégorie</label>
-                    <Select
-                        value={localFilters.category || ""}
-                        onValueChange={(value) => handleCategoryChange(value || null)}
-                        disabled={!localFilters.type}
-                    >
-                        <SelectTrigger className="w-full bg-white text-black">
-                            <SelectValue placeholder="Toutes les catégories" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="all">Toutes les catégories</SelectItem>
-                            {categories?.map((category: { id: string; nom: string }) => (
-                                <SelectItem key={category.id} value={category.id}>
-                                    {category.nom}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                </div>
+
 
                 <div className="space-y-2">
                     <label className="text-sm font-medium">Date de début</label>
@@ -186,7 +156,7 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
                             <RefreshCwIcon className="h-4 w-4" />
 
                         </Button>
-                        <Button className="bg-red text-white" onClick={applyFilters}>Appliquer les filtres</Button>
+                        <Button className="bg-red text-white hover:bg-red-600" onClick={applyFilters}>Appliquer les filtres</Button>
                     </div>
                 </div>
 

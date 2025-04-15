@@ -47,6 +47,7 @@ export const fetchDocuments = async ({
   filters,
 }: DocumentsParams) => {
   const queryParams: Record<string, any> = {
+    sort: ["date_publication:desc"],
     populate: ["types", "fichier", "types.categorie_document"],
     pagination: {
       page,
@@ -107,7 +108,7 @@ export const fetchDocuments = async ({
       },
       url: item.url,
       type: item.types[0],
-      categories: [item.types[0]["categorie_document"]],
+      categories: [item.types[0]?.categorie_document],
       date_publication: item.date_publication,
     })),
     meta: meta,
@@ -130,6 +131,7 @@ export const fetchDocument = async (id: string) => {
 
 export const fetchLatestDocuments = async () => {
   const { data } = await ressources.find({
+    sort: ["date_publication:desc"],
     populate: ["fichier"],
     pagination: {
       pageSize: 6,

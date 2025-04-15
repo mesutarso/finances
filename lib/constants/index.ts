@@ -46,24 +46,38 @@ export const MENU = [
     href: "/services",
   },
   {
-    label: "Marchés des titres",
+    label: "Ressources",
     href: "/ressources",
     submenus: [
       {
+        label: "Documents",
+        href: "/ressources",
+      },
+      {
+        label: "Photos et vidéos",
+        href: "/ressources/photos-et-videos",
+      },
+    ],
+  },
+  {
+    label: "Marchés des titres",
+    href: "/marches-des-titres",
+    submenus: [
+      {
         label: "Calendrier des émissions",
-        href: "/ressources?categorie=calendrier-des-emissions",
+        href: "/marches-des-titres?categorie=calendrier-des-emissions",
       },
       {
         label: "Annonces et résultats",
-        href: "/ressources?categorie=annonces-et-resultats",
+        href: "/marches-des-titres?categorie=annonces-et-resultats",
       },
       {
         label: "Communiqués",
-        href: "/ressources?categorie=communiques",
+        href: "/marches-des-titres?categorie=communiques",
       },
       {
         label: "Autres Publications",
-        href: "/ressources?categorie=autres-publications",
+        href: "/marches-des-titres?categorie=autres-publications",
       },
     ],
   },

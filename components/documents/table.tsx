@@ -44,7 +44,7 @@ export function DocumentsTable({
                     <div className="flex flex-wrap gap-1">
                         {categories.map((cat, index) => (
                             <Badge key={index} variant="outline">
-                                {cat.nom}
+                                {cat?.nom || "-"}
                             </Badge>
                         ))}
                     </div>

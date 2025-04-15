@@ -16,7 +16,7 @@ export interface Document {
 
 export interface DocumentFilters {
   type: string | null;
-  category: string | null;
+  category?: string | null;
   dateFrom: Date | null;
   dateTo: Date | null;
 }

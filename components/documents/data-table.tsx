@@ -38,7 +38,7 @@ export function DocumentsDataTable({ categorie }: { categorie: string }) {
     const { data, isLoading, isError } = useQuery({
         queryKey: ["documents", page, pageSize, search, filters],
         queryFn: () => fetchDocuments({ page, pageSize, search, filters }),
-        enabled: !!categorie,
+
     })
 
     const documents = data?.data || []
@@ -51,7 +51,7 @@ export function DocumentsDataTable({ categorie }: { categorie: string }) {
 
     const handleFiltersChange = (newFilters: DocumentFilters) => {
         setFilters(newFilters)
-        setPage(1) // Reset to first page when filters change
+        setPage(1)
     }
 
     return (

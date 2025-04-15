@@ -11,6 +11,7 @@ const documents = client.collection("documents");
 const categories = client.collection("categories");
 const ressources = client.collection("ressources");
 const types = client.collection("types");
+const mediatheques = client.collection("meiatheques");
 const categoriesDocuments = client.collection("categorie-documents");
 const ministre = client.single("ministre");
 const viceMinistre = client.single("vice-ministre");
@@ -26,6 +27,7 @@ export {
   ressources,
   types,
   categoriesDocuments,
+  mediatheques,
   ministre,
   viceMinistre,
   cabinet,

@@ -3,11 +3,11 @@
 import { motion } from "motion/react"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
-import type { CabinetMember } from "@/lib/constants/cabinet"
+
 
 interface CabinetSectionProps {
     title: string
-    members: CabinetMember[]
+    members: any[]
     level: "primary" | "secondary" | "tertiary" | "quaternary"
     className?: string
 }
