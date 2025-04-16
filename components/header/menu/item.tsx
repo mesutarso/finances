@@ -5,7 +5,7 @@ import { NavigationMenuItem, navigationMenuTriggerStyle } from "../../ui/navigat
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "motion/react"
-import { ArrowDown } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 
 export function MenuItem({ label, href, subMenu }: { label: string, href: string, subMenu: { label: string, href: string }[] }) {
     const pathname = usePathname()
@@ -19,7 +19,7 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                     className={cn(
                         navigationMenuTriggerStyle(),
                         isActive && "bg-primary text-white font-medium",
-                        "uppercase text-sm focus:outline-none"
+                        "capitalise text-lg focus:outline-none focus:ring-0 focus-visible:ring-0"
                     )}
                 >
                     {label}
@@ -36,12 +36,12 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                         className={cn(
                             navigationMenuTriggerStyle(),
                             isActive && "bg-primary text-white font-medium",
-                            "flex items-center gap-1 uppercase text-sm focus:outline-none"
+                            "flex items-center gap-1 capitalise text-lg focus:outline-none focus:ring-0 focus-visible:ring-0"
                         )}
                         href={href}
                     >
                         {label}
-                        <ArrowDown className="h-4 w-4" />
+                        <ChevronDown className="h-4 w-4" />
                     </Link>
                 </DropdownMenuTrigger>
                 <AnimatePresence>
@@ -61,7 +61,7 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                                     <Link
                                         href={item.href}
                                         className={cn(
-                                            "w-full",
+                                            "w-full focus:outline-none focus:ring-0 focus-visible:ring-0",
                                             pathname === item.href && "text-primary font-medium"
                                         )}
                                     >

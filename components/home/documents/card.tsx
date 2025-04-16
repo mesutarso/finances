@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { FileIcon, Download, Eye } from "lucide-react"
-import Image from "next/image"
+import { FileIcon, Download, Eye, FolderOpen } from "lucide-react"
+
 
 interface PdfCardProps {
     id: string
@@ -14,9 +14,9 @@ interface PdfCardProps {
 export default function PdfCard({ id, title, dateAdded, url, description }: PdfCardProps) {
     return (
         <Card className="max-w-md overflow-hidden transition-all hover:shadow-md">
-            <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                <div className="h-12 w-[20%] rounded-md bg-red-100 p-2 flex items-center justify-center">
-                    <Image src={'/folder.svg'} alt={title} width={48} height={48} />
+            <CardHeader className="flex flex-row items-start gap-4 pb-2">
+                <div className="h-12 w-[20%] rounded-md bg-muted p-3 flex items-center justify-center">
+                    <FileIcon className="w-12 h-12 text-primary" />
                 </div>
                 <div className="flex flex-col gap-2 w-[80%]">
                     <CardTitle className="line-clamp-3 text-md">{title}</CardTitle>

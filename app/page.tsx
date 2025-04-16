@@ -7,7 +7,9 @@ import HomeDocuments from "@/components/home/documents";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { latestArticlesQuery } from "@/lib/react-query/articles/options";
 import { latestServicesQuery } from "@/lib/react-query/services/options";
+
 import { getQueryClient } from "@/components/providers/react-query/client";
+
 
 export const metadata: Metadata = {
   title: "Accueil | Ministère des Finances",
@@ -29,6 +31,7 @@ export default async function Home() {
         <HomeServices />
         <HomeDocuments />
       </HydrationBoundary>
+
     </div>
   );
 }

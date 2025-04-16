@@ -19,7 +19,7 @@ function HomeServices() {
                 </div>
                 <div className="flex justify-center">
                     <Link href="/services">
-                        <Button size="lg" className="w-fit bg-red text-white ">Voir les services</Button>
+                        <Button className="w-fit bg-red text-white px-8 py-4 ">Voir tous les services</Button>
                     </Link>
                 </div>
             </div>

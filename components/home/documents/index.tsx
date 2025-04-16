@@ -2,7 +2,6 @@
 import { useQuery } from "@tanstack/react-query"
 import Heading from "@/components/shared/heading"
 import PdfCard from "./card"
-import { documents } from "@/lib/constants/documents"
 import { Button } from "@/components/ui/button"
 import { Link } from "next-view-transitions"
 import { fetchLatestDocuments } from "@/actions/documents"
@@ -25,7 +24,7 @@ function HomeDocuments() {
                 </div>
                 <div className="flex justify-center">
                     <Link href="/ressources">
-                        <Button size="lg" className="w-fit bg-yellow text-primary hover:text-white ">Voir les ressources</Button>
+                        <Button className="w-fit bg-yellow text-primary hover:text-white px-8 py-4 ">Voir toutes les ressources</Button>
                     </Link>
                 </div>
             </div>

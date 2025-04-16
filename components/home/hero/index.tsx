@@ -13,16 +13,10 @@ export default function Home() {
             id: 1,
             title: "Ministère des Finances",
             description:
-                "Le Ministère des Finances est responsable de la gestion des finances publiques, de l'élaboration et de la mise en œuvre de la politique économique et financière du pays. Il assure la préparation et l'exécution du budget de l'État, la gestion de la dette publique, la collecte des impôts et taxes, ainsi que la régulation du secteur financier pour garantir la stabilité économique et promouvoir la croissance durable.",
+                "Gestion des finances publiques, politique économique et financière, budget de l'État, dette publique, impôts, régulation financière.",
             image: "/cfk.jpeg",
         },
-        {
-            id: 2,
-            title: "Nos Missions",
-            description:
-                "Le Ministère des Finances élabore les politiques fiscales et budgétaires, supervise les marchés financiers, gère les relations économiques internationales et veille à la transparence des finances publiques. Notre objectif est d'assurer une gestion rigoureuse des ressources nationales tout en favorisant un environnement propice au développement économique et social.",
-            image: "/cfk.jpeg",
-        },
+
 
     ]
 
@@ -38,7 +32,7 @@ export default function Home() {
     useEffect(() => {
         const interval = setInterval(() => {
             nextSlide()
-        }, 5000)
+        }, 3000)
         return () => clearInterval(interval)
     }, [current])
 
@@ -86,7 +80,7 @@ export default function Home() {
 
     return (
         <section id="hero">
-            <div className="relative min-h-[600px] w-full overflow-hidden">
+            <div className="relative min-h-[500px] w-full overflow-hidden">
                 {slides?.map((slide: any, index: number) => (
                     <div
                         key={slide.id}
@@ -149,21 +143,24 @@ export default function Home() {
                     </div>
                 ))}
 
-
-                <button
-                    onClick={prevSlide}
-                    className="absolute left-4 top-1/2 z-20 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full"
-                    aria-label="Slide précédente"
-                >
-                    <ChevronLeft className="h-6 w-6" />
-                </button>
-                <button
-                    onClick={nextSlide}
-                    className="absolute right-4 top-1/2 z-20 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full"
-                    aria-label="Slide suivante"
-                >
-                    <ChevronRight className="h-6 w-6" />
-                </button>
+                {slides.length > 1 && (
+                    <>
+                        <button
+                            onClick={prevSlide}
+                            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full"
+                            aria-label="Slide précédente"
+                        >
+                            <ChevronLeft className="h-6 w-6" />
+                        </button>
+                        <button
+                            onClick={nextSlide}
+                            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full"
+                            aria-label="Slide suivante"
+                        >
+                            <ChevronRight className="h-6 w-6" />
+                        </button>
+                    </>
+                )}
 
                 {/* Indicators */}
                 <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-2">

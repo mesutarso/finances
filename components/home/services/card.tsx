@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
-import BRAIN from "@/public/intelligence.webp"
+import { ChartNoAxesCombined, DatabaseZap, MonitorCog } from "lucide-react"
+
+const icons = [ChartNoAxesCombined, DatabaseZap, MonitorCog];
 
 interface ServiceCardProps {
     title: string
@@ -11,17 +12,27 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({ title, description, link, type }: ServiceCardProps) {
+    const randomIndex = Math.floor(Math.random() * icons.length);
+    const IconComponent = icons[randomIndex];
+
     return (
-        <a href={link} target="_blank" rel="noopener noreferrer">
-            <Card className="flex flex-row h-40 gap-2 transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg hover:border-primary/20">
-                <CardContent className="w-1/4 transition-transform duration-300 hover:scale-105">
-                    <Image src={BRAIN} alt="Service" />
-                </CardContent>
-                <CardHeader className="w-3/4">
-                    <CardTitle className="text-sm font-bold line-clamp-3 text-primary transition-colors duration-300 hover:text-primary/80">{title}</CardTitle>
-                    <CardDescription className="text-sm line-clamp-2">{description}</CardDescription>
-                    <Badge variant="outline" className="transition-colors duration-300 hover:bg-primary/10">{type || 'Service'}</Badge>
+        <a href={link} target="_blank" rel="noopener noreferrer" className="group">
+            <Card className="h-full transition-all duration-300 ease-in-out group-hover:scale-[1.02] group-hover:shadow-lg group-hover:border-primary/20 group-hover:bg-primary">
+                <CardHeader className="flex  items-center justify-center h-full p-4 ">
+                    <div className='w-[20%]'>
+
+                        <IconComponent className="w-16 h-16 mb-2 text-primary group-hover:text-white transition-colors duration-300" />
+                    </div>
+                    <div className='w-[80%]'>
+                        <CardTitle className="text-lg font-bold line-clamp-3 text-primary group-hover:text-white transition-colors duration-300">{title}</CardTitle>
+                        <CardDescription className="mt-1 text-sm line-clamp-2 group-hover:text-white transition-colors duration-300">{description}</CardDescription>
+
+                    </div>
+
                 </CardHeader>
+                <CardContent>
+                    <Badge variant="outline" className="mt-auto text-xs group-hover:text-white group-hover:border-white/50 group-hover:bg-transparent transition-colors duration-300">{type || 'Service'}</Badge>
+                </CardContent>
             </Card>
         </a>
     )

@@ -19,7 +19,7 @@ function HomePosts() {
             </div>
             <div className="flex justify-center">
                 <Link href="/actualites">
-                    <Button size="lg" className="w-fit bg-primary text-white ">Voir les actualités</Button>
+                    <Button className="w-fit bg-primary text-white px-8 py-4 ">Voir toutes les actualités</Button>
                 </Link>
             </div>
         </div>
