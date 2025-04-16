@@ -19,7 +19,7 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                     className={cn(
                         navigationMenuTriggerStyle(),
                         isActive && "bg-primary text-white font-medium",
-                        "capitalise text-lg focus:outline-none focus:ring-0 focus-visible:ring-0"
+                        "capitalise text-xl focus:outline-none focus:ring-0 focus-visible:ring-0"
                     )}
                 >
                     {label}
@@ -35,8 +35,8 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                     <Link
                         className={cn(
                             navigationMenuTriggerStyle(),
-                            isActive && "bg-primary text-white font-medium",
-                            "flex items-center gap-1 capitalise text-lg focus:outline-none focus:ring-0 focus-visible:ring-0"
+                            isActive && "bg-primary text-white text-xl font-medium",
+                            "flex items-center gap-1 capitalise text-xl focus:outline-none focus:ring-0 focus-visible:ring-0"
                         )}
                         href={href}
                     >
@@ -61,8 +61,8 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                                     <Link
                                         href={item.href}
                                         className={cn(
-                                            "w-full focus:outline-none focus:ring-0 focus-visible:ring-0",
-                                            pathname === item.href && "text-primary font-medium"
+                                            "w-full text-lg focus:outline-none focus:ring-0 focus-visible:ring-0",
+                                            pathname === item.href && "text-primary font-medium text-lg"
                                         )}
                                     >
                                         {item.label}

@@ -22,7 +22,7 @@ export function DocumentsTable({
         {
             accessorKey: "titre",
             header: "Titre",
-            cell: ({ row }) => <div className="font-medium text-balance line-clamp-4">{row.getValue("titre")}</div>,
+            cell: ({ row }) => <div className="font-medium text-lg text-balance line-clamp-4">{row.getValue("titre")}</div>,
         },
 
         {
@@ -43,7 +43,7 @@ export function DocumentsTable({
                 return (
                     <div className="flex flex-wrap gap-1">
                         {categories.map((cat, index) => (
-                            <Badge key={index} variant="outline">
+                            <Badge key={index} variant="outline" className="text-md">
                                 {cat?.nom || "-"}
                             </Badge>
                         ))}
@@ -117,7 +117,7 @@ export function DocumentsTable({
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id} className="hover:bg-primary">
                             {headerGroup.headers.map((header) => (
-                                <TableHead key={header.id} className="text-white">
+                                <TableHead key={header.id} className="text-white text-md">
                                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                 </TableHead>
                             ))}
@@ -129,7 +129,7 @@ export function DocumentsTable({
                         table.getRowModel().rows.map((row) => (
                             <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                                    <TableCell key={cell.id} className="text-md">{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                                 ))}
                             </TableRow>
                         ))

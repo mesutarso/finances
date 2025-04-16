@@ -25,12 +25,12 @@ export function DataTablePagination({
 
     return (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
-            <div className="text-sm text-muted-foreground">
+            <div className="text-lg text-muted-foreground">
                 Affichage de {totalCount ? start : 0} à {end} sur {totalCount} entrées
             </div>
             <div className="flex items-center space-x-6 lg:space-x-8">
                 <div className="flex items-center space-x-2">
-                    <p className="text-sm font-medium">Documents par page</p>
+                    <p className="text-lg font-medium">Documents par page</p>
                     <Select value={`${pageSize}`} onValueChange={(value) => onPageSizeChange(Number(value))}>
                         <SelectTrigger className="h-8 w-[70px]">
                             <SelectValue placeholder={pageSize} />
@@ -44,7 +44,7 @@ export function DataTablePagination({
                         </SelectContent>
                     </Select>
                 </div>
-                <div className="flex items-center justify-center text-sm font-medium">
+                <div className="flex items-center justify-center text-lg font-medium">
                     Page {currentPage} sur {totalPages}
                 </div>
                 <div className="flex items-center space-x-2">
