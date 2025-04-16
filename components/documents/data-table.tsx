@@ -57,14 +57,15 @@ export function DocumentsDataTable({ categorie }: { categorie: string }) {
     return (
         <div className="space-y-4">
             <div className="flex flex-col sm:flex-row items-center gap-4">
-                <div className="relative w-full sm:w-80">
+                <div className="relative w-full sm:w-80 text-md">
                     <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                     <Input placeholder="Rechercher par titre..." value={search} onChange={handleSearchChange} className="pl-8" />
                 </div>
                 <Button
+                    size="lg"
                     variant="outline"
                     onClick={() => setShowFilters(!showFilters)}
-                    className="w-full sm:w-auto flex items-center gap-2"
+                    className="w-full sm:w-auto flex items-center gap-2 capitalize"
                 >
                     <FilterIcon className="h-4 w-4" />
                     Filtres

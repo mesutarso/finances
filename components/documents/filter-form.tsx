@@ -71,10 +71,10 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
         <div className="rounded-md border p-4 bg-primary text-white space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Type de document</label>
+                    <label className="text-md font-medium">Type de document</label>
                     <Select value={localFilters.type || ""} onValueChange={(value) => handleTypeChange(value || null)}>
-                        <SelectTrigger className="w-full bg-white  text-black">
-                            <SelectValue className="text-black" placeholder="Tous les types" />
+                        <SelectTrigger className="w-full bg-white  text-black  ">
+                            <SelectValue className="text-black text-md uppercase font-medium px-8 py-2  " placeholder="Tous les types" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="all">Tous les types</SelectItem>
@@ -90,14 +90,14 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
 
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Date de début</label>
+                    <label className="text-md font-medium">Date de début</label>
                     <Popover>
-                        <PopoverTrigger asChild>
+                        <PopoverTrigger asChild className="w-full text-black ">
                             <Button
                                 variant="outline"
                                 className={cn(
-                                    "w-full justify-start text-left font-normal",
-                                    !localFilters.dateFrom && "text-muted-foreground",
+                                    "w-full justify-start text-left font-normal text-black    text-md px-8 py-2",
+                                    !localFilters.dateFrom && "text-black",
                                 )}
                             >
                                 <CalendarIcon className="mr-2 h-4 w-4" />
@@ -121,14 +121,14 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Date de fin</label>
+                    <label className="text-md font-medium">Date de fin</label>
                     <Popover>
-                        <PopoverTrigger asChild>
+                        <PopoverTrigger asChild className="w-full text-black ">
                             <Button
                                 variant="outline"
                                 className={cn(
-                                    "w-full justify-start text-left font-normal",
-                                    !localFilters.dateTo && "text-muted-foreground",
+                                    "w-full justify-start text-left font-normal text-black    text-md px-8 py-2",
+                                    !localFilters.dateTo && "text-black",
                                 )}
                             >
                                 <CalendarIcon className="mr-2 h-4 w-4" />
@@ -150,13 +150,13 @@ export function DocumentFilterForm({ filters, onFiltersChange }: DocumentFilterF
                     </Popover>
                 </div>
                 <div className='space-y-2'>
-                    <label className="text-sm font-medium ">Recherche</label>
+                    <label className="text-md font-medium ">Recherche</label>
                     <div className="flex items-center space-x-2 ">
-                        <Button className="bg-white text-black" size={'icon'} onClick={resetFilters}>
+                        <Button size="lg" className="bg-white text-black" size={'icon'} onClick={resetFilters}>
                             <RefreshCwIcon className="h-4 w-4" />
 
                         </Button>
-                        <Button className="bg-red text-white hover:bg-red-600" onClick={applyFilters}>Appliquer les filtres</Button>
+                        <Button size="lg" className="bg-red text-white hover:bg-red-600 " onClick={applyFilters}>Appliquer les filtres</Button>
                     </div>
                 </div>
 

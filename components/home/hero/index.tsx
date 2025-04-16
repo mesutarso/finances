@@ -125,11 +125,11 @@ export default function Home() {
                                             {slide.description}
                                         </motion.p>
                                         <motion.div className="flex flex-col sm:flex-row gap-4 justify-start" variants={itemVariants}>
-                                            <Button size="lg" className="bg-primary hover:bg-primary/80 text-white font-medium px-6 py-3">
+                                            <Button className="bg-primary hover:bg-primary/80 text-white font-medium px-6 py-3">
                                                 Programme du ministre
                                             </Button>
                                             <Button
-                                                size="lg"
+
                                                 variant="outline"
                                                 className="border-primary text-primary  font-medium px-6 py-3"
                                             >
