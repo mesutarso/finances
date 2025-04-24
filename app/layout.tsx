@@ -27,7 +27,10 @@ const myriadPro = localFont({
 
 
 export const metadata: Metadata = {
-  title: "Ministère des Finances",
+  title: {
+    default: "Ministère des Finances",
+    template: "%s | Ministère des Finances",
+  },
   description: "Ministère des Finances",
 };
 

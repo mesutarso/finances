@@ -5,7 +5,7 @@ import MinistreContent from "@/components/ministere/ministre"
 import { getQueryClient } from "@/components/providers/react-query/client";
 
 export const metadata: Metadata = {
-    title: "Ministre | Ministère des Finances",
+    title: "Ministre",
     description: "Le site officiel du Ministre des Finances de la République Démocratique du Congo",
 };
 
