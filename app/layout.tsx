@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ViewTransitions } from 'next-view-transitions'
 import Providers from "@/components/providers/react-query";
+import ScrollToTopButton from "@/components/shared/scroll-to-top-button";
 
 
 const myriadPro = localFont({
@@ -46,6 +47,7 @@ export default function RootLayout({
             <main className="min-h-screen">
               {children}
             </main>
+            <ScrollToTopButton />
             <Footer />
           </body>
         </html>
