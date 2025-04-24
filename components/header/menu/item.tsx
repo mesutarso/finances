@@ -18,8 +18,8 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                     href={href}
                     className={cn(
                         navigationMenuTriggerStyle(),
-                        isActive && "bg-primary text-white font-medium",
-                        "capitalise text-xl focus:outline-none focus:ring-0 focus-visible:ring-0"
+                        "capitalise text-xl focus:outline-none focus:ring-0 focus-visible:ring-0 hover:text-blue",
+                        isActive && "bg-primary text-white font-medium hover:text-white",
                     )}
                 >
                     {label}
@@ -35,8 +35,8 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                     <Link
                         className={cn(
                             navigationMenuTriggerStyle(),
-                            isActive && "bg-primary text-white text-xl font-medium",
-                            "flex items-center gap-1 capitalise text-xl focus:outline-none focus:ring-0 focus-visible:ring-0"
+                            "flex items-center gap-1 capitalise text-xl focus:outline-none focus:ring-0 focus-visible:ring-0 hover:text-blue",
+                            isActive && "bg-primary text-white text-xl font-medium hover:text-white",
                         )}
                         href={href}
                     >

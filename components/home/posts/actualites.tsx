@@ -155,8 +155,8 @@ function Posts() {
                             <div className="flex items-center gap-2">
                                 <span className="text-sm whitespace-nowrap">Articles par page:</span>
                                 <Select value={pageSize.toString()} onValueChange={handlePageSizeChange}>
-                                    <SelectTrigger className="w-[80px]">
-                                        <SelectValue placeholder={pageSize.toString()} />
+                                    <SelectTrigger className="w-[80px] text-black">
+                                        <SelectValue placeholder={pageSize.toString()} className="text-sm text-black" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="5">5</SelectItem>
@@ -178,7 +178,7 @@ function Posts() {
                                     isActive={false}
                                     aria-label="Aller à la première page"
                                     aria-disabled={page === 1}
-                                    className={page === 1 ? "opacity-50 cursor-not-allowed" : ""}
+                                    className={page === 1 ? "opacity-50 cursor-not-allowed" : "text-sm"}
                                 >
                                     <ChevronFirst className="h-4 w-4" />
                                 </PaginationLink>
@@ -188,7 +188,7 @@ function Posts() {
                                 <PaginationPrevious
                                     onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                                     aria-disabled={page === 1}
-                                    className={page === 1 ? "opacity-50 cursor-not-allowed" : ""}
+                                    className={page === 1 ? "opacity-50 cursor-not-allowed" : "text-sm"}
                                 />
                             </PaginationItem>
 
@@ -198,7 +198,7 @@ function Posts() {
                                 <PaginationNext
                                     onClick={() => setPage((prev) => Math.min(prev + 1, pageCount))}
                                     aria-disabled={page === pageCount}
-                                    className={page === pageCount ? "opacity-50 cursor-not-allowed" : ""}
+                                    className={page === pageCount ? "opacity-50 cursor-not-allowed" : "text-sm"}
                                 />
                             </PaginationItem>
 

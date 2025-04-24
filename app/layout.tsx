@@ -18,11 +18,8 @@ const myriadPro = localFont({
     weight: '700',
     style: 'bold',
   },
-  {
-    path: '../public/fonts/MyriadPro-Light.otf',
-    weight: '300',
-    style: 'light',
-  }],
+  ],
+
   variable: "--font-myriad-pro",
 })
 

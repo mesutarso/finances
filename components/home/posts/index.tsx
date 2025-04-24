@@ -19,7 +19,12 @@ function HomePosts() {
             </div>
             <div className="flex justify-center">
                 <Link href="/actualites">
-                    <Button className="w-fit bg-primary text-white px-8 py-4 ">Voir toutes les actualités</Button>
+                    <Button className="relative w-fit bg-primary text-white px-8 py-4 overflow-hidden group border-2 border-primary hover:border-primary">
+                        <span className="absolute cursor-pointer w-0 h-full bg-white left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                        <span className="relative cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
+                            Voir toutes les actualités
+                        </span>
+                    </Button>
                 </Link>
             </div>
         </div>

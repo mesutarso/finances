@@ -9,7 +9,7 @@ type LogoProps = {
 function Logo({ type }: LogoProps) {
     return (
         <Link href="/">
-            <Image src={type === "dark" ? LOGO_DARK : LOGO_WHITE} alt="Logo" width={250} height={100} />
+            <Image src={type === "dark" ? LOGO_DARK : LOGO_WHITE} alt="Logo" width={200} height={100} />
         </Link>
     )
 }

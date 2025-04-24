@@ -4,6 +4,7 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "motion/react"
+import { Link } from "next-view-transitions"
 
 export default function Home() {
     const [current, setCurrent] = useState(0)
@@ -80,7 +81,7 @@ export default function Home() {
 
     return (
         <section id="hero">
-            <div className="relative min-h-[500px] w-full overflow-hidden">
+            <div className="relative min-h-[600px] w-full overflow-hidden">
                 {slides?.map((slide: any, index: number) => (
                     <div
                         key={slide.id}
@@ -105,7 +106,7 @@ export default function Home() {
                             {index === current && (
                                 <motion.div
                                     key={`content-${slide.id}`}
-                                    className="relative container z-10 flex h-full flex-col justify-center text-white px-4 md:px-8 lg:px-16"
+                                    className="relative container z-10 flex h-full flex-col justify-center text-white px-4 "
                                     variants={containerVariants}
                                     initial="hidden"
                                     animate="visible"
@@ -125,16 +126,25 @@ export default function Home() {
                                             {slide.description}
                                         </motion.p>
                                         <motion.div className="flex flex-col sm:flex-row gap-4 justify-start" variants={itemVariants}>
-                                            <Button className="bg-primary hover:bg-primary/80 text-white font-medium px-6 py-3">
-                                                Programme du ministre
-                                            </Button>
-                                            <Button
-
-                                                variant="outline"
-                                                className="border-primary text-primary  font-medium px-6 py-3"
-                                            >
-                                                Contactez nous
-                                            </Button>
+                                            <Link href="/programme">
+                                                <Button className="relative bg-primary text-white font-medium px-6 py-3 overflow-hidden group border-2 border-primary hover:border-primary">
+                                                    <span className="absolute cursor-pointer w-0 h-full bg-white left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                                                    <span className="relative cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
+                                                        Programme du ministre
+                                                    </span>
+                                                </Button>
+                                            </Link>
+                                            <Link href="/contact">
+                                                <Button
+                                                    variant="outline"
+                                                    className="relative border-primary text-primary font-medium px-6 py-3 overflow-hidden group"
+                                                >
+                                                    <span className="absolute cursor-pointer  w-0 h-full bg-yellow left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                                                    <span className="relative cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
+                                                        Contactez nous
+                                                    </span>
+                                                </Button>
+                                            </Link>
                                         </motion.div>
                                     </div>
                                 </motion.div>

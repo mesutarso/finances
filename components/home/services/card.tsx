@@ -17,21 +17,21 @@ function ServiceCard({ title, description, link, type }: ServiceCardProps) {
 
     return (
         <a href={link} target="_blank" rel="noopener noreferrer" className="group">
-            <Card className="h-full transition-all duration-300 ease-in-out group-hover:scale-[1.02] group-hover:shadow-lg group-hover:border-primary/20 group-hover:bg-primary">
-                <CardHeader className="flex  items-center justify-center h-full p-4 ">
-                    <div className='w-[20%]'>
+            <Card className="relative h-full overflow-hidden border-2 border-transparent hover:border-primary/20 transition-all duration-300 ease-in-out group-hover:scale-[1.02] group-hover:shadow-lg">
+                <span className="absolute w-0 h-0 bg-primary left-0 bottom-0 transition-all duration-500 ease-in-out group-hover:w-full group-hover:h-full z-0"></span>
 
-                        <IconComponent className="w-16 h-16 mb-2 text-primary group-hover:text-white transition-colors duration-300" />
+                <CardHeader className="relative z-10 flex items-center justify-center h-full p-4">
+                    <div className='w-[20%]'>
+                        <IconComponent className="w-16 h-16 mb-2 text-primary transition-colors duration-300 cursor-pointer group-hover:text-white" />
                     </div>
                     <div className='w-[80%]'>
-                        <CardTitle className="text-lg font-bold line-clamp-3 text-primary group-hover:text-white transition-colors duration-300">{title}</CardTitle>
-                        <CardDescription className="mt-1 text-sm line-clamp-2 group-hover:text-white transition-colors duration-300">{description}</CardDescription>
-
+                        <CardTitle className="text-lg font-bold line-clamp-3 text-primary transition-colors duration-300 cursor-pointer group-hover:text-white">{title}</CardTitle>
+                        <CardDescription className="mt-1 text-sm line-clamp-2 transition-colors duration-300 cursor-pointer group-hover:text-white">{description}</CardDescription>
                     </div>
-
                 </CardHeader>
-                <CardContent>
-                    <Badge variant="outline" className="mt-auto text-xs group-hover:text-white group-hover:border-white/50 group-hover:bg-transparent transition-colors duration-300">{type || 'Service'}</Badge>
+
+                <CardContent className="relative z-10">
+                    <Badge variant="outline" className="mt-auto text-xs transition-colors duration-300 cursor-pointer group-hover:text-white group-hover:border-white/50 group-hover:bg-transparent">{type || 'Service'}</Badge>
                 </CardContent>
             </Card>
         </a>

@@ -1,6 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { FileIcon, Download, Eye, FolderOpen } from "lucide-react"
+import { Link } from "next-view-transitions"
 
 
 interface PdfCardProps {
@@ -29,16 +30,22 @@ export default function PdfCard({ id, title, dateAdded, url, description }: PdfC
 
 
             <CardFooter className="flex justify-between pt-2">
-                <Button variant="outline" size="sm" asChild>
-                    <a href={`/ressources/${id}`} target="_blank" rel="noopener noreferrer">
-                        <Eye className="mr-2 h-4 w-4" />
-                        Visualiser
-                    </a>
+                <Button variant="outline" size="sm" asChild className="relative overflow-hidden border-primary text-primary capitalize text-sm font-medium px-2 py-2 group">
+                    <Link href={`/ressources/${id}`} target="_blank" rel="noopener noreferrer">
+                        <span className="absolute w-0 h-full bg-primary left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                        <span className="relative z-10 flex items-center transition-colors duration-500 ease-in-out group-hover:text-white">
+                            <Eye className="mr-2 h-4 w-4" />
+                            Visualiser
+                        </span>
+                    </Link>
                 </Button>
-                <Button variant="default" size="sm" asChild>
+                <Button variant="default" size="sm" asChild className="relative overflow-hidden bg-primary capitalize text-white text-sm font-medium px-2 py-2 border-2 border-primary group">
                     <a href={url} download>
-                        <Download className="mr-2 h-4 w-4" />
-                        Télécharger
+                        <span className="absolute w-0 h-full bg-white left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
+                        <span className="relative z-10 flex items-center transition-colors duration-500 ease-in-out group-hover:text-primary">
+                            <Download className="mr-2 h-4 w-4" />
+                            Télécharger
+                        </span>
                     </a>
                 </Button>
             </CardFooter>

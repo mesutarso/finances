@@ -58,7 +58,8 @@ function PaginationLink({
           variant: isActive ? "default" : "outline",
           size,
         }),
-        className
+        className,
+        "text-sm py-2"
       )}
       {...props}
     />

@@ -1,213 +1,307 @@
-//@ts-nocheck
 "use client"
-import { useEffect, useState, useMemo } from "react"
-import { Book, File, Loader2, Search } from "lucide-react"
-import { useQuery } from "@tanstack/react-query"
+
+import type React from "react"
+
+import { useCallback, useEffect, useState, memo, useMemo } from "react"
+import { Book, File, Loader2, Search, X } from "lucide-react"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { useDebounce } from "use-debounce"
-import { getInitialData } from "@/actions/search"
-import { Button } from "@/components/ui/button"
-import {
-    CommandDialog,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandSeparator,
-} from "@/components/ui/command"
 import { searchApi } from "@/lib/api"
 import { Link } from "next-view-transitions"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+
+type SearchResult = {
+    id: string
+    title: string
+    link: string
+    date?: string
+}
+
+type SearchResults = {
+    formattedArticles?: SearchResult[]
+    formattedDocuments?: SearchResult[]
+    formattedServices?: SearchResult[]
+}
+
+const ResultItem = memo(
+    ({
+        result,
+        type,
+        onSelect,
+    }: {
+        result: SearchResult
+        type: "article" | "document" | "service"
+        onSelect: () => void
+    }) => {
+        const Icon = type === "article" ? Book : File
+        const href =
+            type === "article" ? `/articles/${result.link}` : type === "document" ? `/ressources/${result.link}` : result.link
+
+        return (
+            <li className="group flex items-center gap-2 rounded-md px-3 py-2 hover:bg-muted transition-colors duration-150">
+                <Link href={href} className="flex w-full items-center" onClick={onSelect}>
+                    <Icon className="mr-2 h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors duration-150" />
+                    <span className="flex-1 text-sm group-hover:text-primary transition-colors duration-150">{result.title}</span>
+                    {result.date && <span className="ml-auto text-xs text-muted-foreground">{result.date}</span>}
+                </Link>
+            </li>
+        )
+    },
+    (prevProps, nextProps) => prevProps.result.id === nextProps.result.id
+)
+ResultItem.displayName = "ResultItem"
+
+const ResultGroup = memo(
+    ({
+        title,
+        results,
+        type,
+        onSelect,
+    }: {
+        title: string
+        results: SearchResult[]
+        type: "article" | "document" | "service"
+        onSelect: () => void
+    }) => {
+        if (!results || results.length === 0) return null
+
+        return (
+            <div className="py-2">
+                <h3 className="mb-2 px-3 text-sm font-medium text-muted-foreground">{title}</h3>
+                <ul>
+                    {results.map((result) => (
+                        <ResultItem key={`${type}-${result.id}`} result={result} type={type} onSelect={onSelect} />
+                    ))}
+                </ul>
+            </div>
+        )
+    },
+    (prevProps, nextProps) => {
+        if (prevProps.results.length !== nextProps.results.length) return false
+        return prevProps.results.every((prevResult, index) => prevResult.id === nextProps.results[index].id)
+    }
+)
+ResultGroup.displayName = "ResultGroup"
+
+const LoadingState = memo(() => (
+    <div className="flex flex-col space-y-6 pt-2 pb-4">
+        <div className="space-y-3">
+            <Skeleton className="h-4 w-24 bg-muted-foreground/20" />
+            <div className="space-y-2">
+                {Array(3).fill(0).map((_, i) => (
+                    <div key={`skeleton-article-${i}`} className="flex items-center space-x-2 px-3 py-2">
+                        <Skeleton className="h-4 w-4 rounded-full bg-muted-foreground/20" />
+                        <Skeleton className="h-4 w-4/5 bg-muted-foreground/20" />
+                        <Skeleton className="h-3 w-1/6 ml-auto bg-muted-foreground/20" />
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <div className="space-y-3">
+            <Skeleton className="h-4 w-24 bg-muted-foreground/20" />
+            <div className="space-y-2">
+                {Array(2).fill(0).map((_, i) => (
+                    <div key={`skeleton-document-${i}`} className="flex items-center space-x-2 px-3 py-2">
+                        <Skeleton className="h-4 w-4 rounded-full bg-muted-foreground/20" />
+                        <Skeleton className="h-4 w-3/4 bg-muted-foreground/20" />
+                        <Skeleton className="h-3 w-1/6 ml-auto bg-muted-foreground/20" />
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <div className="space-y-3">
+            <Skeleton className="h-4 w-24 bg-muted-foreground/20" />
+            <div className="space-y-2">
+                {Array(2).fill(0).map((_, i) => (
+                    <div key={`skeleton-service-${i}`} className="flex items-center px-3 py-2">
+                        <Skeleton className="h-4 w-5/6 bg-muted-foreground/20" />
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+), () => true)
+LoadingState.displayName = "LoadingState"
+
+const EmptyState = memo(({ query }: { query: string }) => (
+    <div className="flex flex-col items-center justify-center py-8 text-center">
+        <p className="text-sm text-muted-foreground">
+            {!query || query.length < 2 ? "Commencez à taper pour rechercher..." : `Aucun résultat trouvé pour "${query}"`}
+        </p>
+    </div>
+), (prevProps, nextProps) => prevProps.query === nextProps.query)
+EmptyState.displayName = "EmptyState"
 
 export function SearchDialog() {
     const [open, setOpen] = useState(false)
     const [search, setSearch] = useState("")
-    const [debouncedSearch] = useDebounce(search, 500)
+    const [debouncedSearch] = useDebounce(search, 300)
+    const queryClient = useQueryClient()
 
-    const { data: initialData } = useQuery({
-        queryKey: ["initialData"],
-        queryFn: async () => await getInitialData(),
-        staleTime: 1000 * 60 * 60, // 1 heure
-        cacheTime: 1000 * 60 * 60 * 24, // 24 heures
-    })
-
-    useEffect(() => {
-        const down = (e: KeyboardEvent) => {
-            if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-                e.preventDefault()
-                setOpen((open) => !open)
-            }
-        }
-        document.addEventListener("keydown", down)
-        return () => document.removeEventListener("keydown", down)
+    const toggleDialog = useCallback(() => {
+        setOpen((prev) => !prev)
     }, [])
 
-    const filteredResults = useMemo(() => {
-        if (!initialData) return { articles: [], documents: [], services: [] }
+    const closeDialog = useCallback(() => {
+        setOpen(false)
+    }, [])
 
-        const searchLower = search.toLowerCase()
-        return {
-            articles: initialData.articles?.filter((article) =>
-                article.title.toLowerCase().includes(searchLower)
-            ) || [],
-            documents: initialData.documents?.filter((document) =>
-                document.title.toLowerCase().includes(searchLower)
-            ) || [],
-            services: initialData.services?.filter((service) =>
-                service.title.toLowerCase().includes(searchLower)
-            ) || []
+    const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value)
+    }, [])
+
+    const clearSearch = useCallback(() => {
+        setSearch("")
+    }, [])
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault()
+                toggleDialog()
+            }
         }
-    }, [initialData, search])
 
-    const shouldFetchApi = useMemo(() =>
-        debouncedSearch.length >= 2 &&
-        (filteredResults.articles.length === 0 ||
-            filteredResults.documents.length === 0 ||
-            filteredResults.services.length === 0),
-        [debouncedSearch, filteredResults]
-    )
+        document.addEventListener("keydown", handleKeyDown)
+        return () => document.removeEventListener("keydown", handleKeyDown)
+    }, [toggleDialog])
 
-    const { data: apiResults, isLoading } = useQuery({
+    useEffect(() => {
+        const popularTerms = ["guide", "tutoriel", "documentation", "finance"]
+        if (typeof window !== 'undefined') {
+            if ('requestIdleCallback' in window) {
+                window.requestIdleCallback(() => {
+                    popularTerms.forEach((term) => {
+                        queryClient.prefetchQuery({
+                            queryKey: ["search", term],
+                            queryFn: () => searchApi(term),
+                            staleTime: 1000 * 60 * 30,
+                        })
+                    })
+                })
+            } else {
+                setTimeout(() => {
+                    popularTerms.forEach((term) => {
+                        queryClient.prefetchQuery({
+                            queryKey: ["search", term],
+                            queryFn: () => searchApi(term),
+                            staleTime: 1000 * 60 * 30,
+                        })
+                    })
+                }, 1000)
+            }
+        }
+    }, [queryClient])
+
+    useEffect(() => {
+        if (!open) {
+            const timer = setTimeout(() => {
+                setSearch("")
+            }, 300)
+            return () => clearTimeout(timer)
+        }
+    }, [open])
+
+    const {
+        data: results,
+        isLoading,
+        error,
+    } = useQuery<SearchResults>({
         queryKey: ["search", debouncedSearch],
-        queryFn: async () => await searchApi(debouncedSearch),
-        enabled: shouldFetchApi,
-        staleTime: 1000 * 60 * 5, // 5 minutes
-        cacheTime: 1000 * 60 * 30, // 30 minutes
+        queryFn: async () => {
+            if (!debouncedSearch || debouncedSearch.length < 2)
+                return {
+                    formattedArticles: [],
+                    formattedDocuments: [],
+                    formattedServices: [],
+                }
+            return await searchApi(debouncedSearch)
+        },
+        enabled: open && debouncedSearch.length >= 2,
+        staleTime: 1000 * 60 * 5,
+        refetchOnWindowFocus: false,
+        placeholderData: (previousData) => previousData,
     })
 
-    const renderLoadingState = () => (
-        <div className="flex items-center justify-center py-6">
-            <Loader2 className="h-6 w-6 animate-spin text-primary" />
-            <span className="ml-2 text-sm text-primary">Recherche en cours...</span>
-        </div>
-    )
+    const hasResults = useMemo(() => {
+        if (!results) return false;
 
-    const renderResults = () => (
-        <>
+        return (
+            (results.formattedArticles && results.formattedArticles.length > 0) ||
+            (results.formattedDocuments && results.formattedDocuments.length > 0) ||
+            (results.formattedServices && results.formattedServices.length > 0)
+        );
+    }, [results])
 
-            {filteredResults.articles.length > 0 && (
-                <CommandGroup heading="Articles récents">
-                    {filteredResults?.articles?.map((article: any) => (
-                        <CommandItem
-                            key={`recent-article-${article.id}`}
-                            onSelect={() => setOpen(false)}
-                        >
-                            <Link href={`/articles/${article.link}`} className="grid grid-cols-[5%_70%_25%] w-full">
-                                <Book className="mr-2 h-4 w-4" />
-                                <span className="text-left hover:text-primary">{article.title}</span>
-                                <span className="ml-auto text-xs text-muted-foreground">{article.date}</span>
-                            </Link>
-                        </CommandItem>
-                    ))}
-                </CommandGroup>
-            )}
+    const renderContent = useCallback(() => {
+        if (isLoading) return <LoadingState />
 
-            {filteredResults.documents.length > 0 && (
-                <CommandGroup heading="Documents récents">
-                    {filteredResults?.documents?.map((document: any) => (
-                        <CommandItem
-                            key={`recent-document-${document.id}`}
-                            onSelect={() => setOpen(false)}
-                        >
-                            <Link href={`/ressources/${document.link}`} className="flex items-center w-full">
-                                <File className="mr-2 h-4 w-4" />
-                                <span>{document.title}</span>
-                                <span className="ml-auto text-xs text-muted-foreground">{document.date}</span>
-                            </Link>
-                        </CommandItem>
-                    ))}
-                </CommandGroup>
-            )}
+        if (error)
+            return (
+                <div className="py-8 text-center">
+                    <p className="text-sm text-destructive">Une erreur est survenue. Veuillez réessayer.</p>
+                </div>
+            )
 
-            {filteredResults.services.length > 0 && (
-                <CommandGroup heading="Services récents">
-                    {filteredResults?.services?.map((service: any) => (
-                        <CommandItem
-                            key={`recent-service-${service.id}`}
-                            onSelect={() => setOpen(false)}
-                        >
-                            <Link href={service.link} className="flex items-center w-full">
-                                <span>{service.title}</span>
-                            </Link>
-                        </CommandItem>
-                    ))}
-                </CommandGroup>
-            )}
+        if (!hasResults) return <EmptyState query={debouncedSearch} />
 
-            {shouldFetchApi && (
-                <>
-
-                    <CommandGroup heading="Résultats de recherche (articles)">
-                        {apiResults?.formattedArticles?.map((article: any) => (
-                            <CommandItem
-                                key={article.id}
-                                onSelect={() => setOpen(false)}
-                            >
-                                <Book className="mr-2 h-4 w-4" />
-                                <span>{article.title}</span>
-                                <span className="ml-auto text-xs text-muted-foreground">{article.date}</span>
-                            </CommandItem>
-                        ))}
-                    </CommandGroup>
-
-
-
-                    <CommandGroup heading="Résultats de recherche (documents)">
-                        {apiResults?.formattedDocuments?.map((document: any) => (
-                            <CommandItem
-                                key={document.id}
-                                onSelect={() => setOpen(false)}
-                            >
-                                <File className="mr-2 h-4 w-4" />
-                                <span>{document.title}</span>
-                                <span className="ml-auto text-xs text-muted-foreground">{document.date}</span>
-                            </CommandItem>
-                        ))}
-                    </CommandGroup>
-
-
-
-                    <CommandGroup heading="Résultats de recherche (services)">
-                        {apiResults?.formattedServices?.map((service: any) => (
-                            <CommandItem
-                                key={service.id}
-                                onSelect={() => setOpen(false)}
-                            >
-                                <File className="mr-2 h-4 w-4" />
-                                <span>{service.title}</span>
-                                <span className="ml-auto text-xs text-muted-foreground">{service.date}</span>
-                            </CommandItem>
-                        ))}
-                    </CommandGroup>
-
-
-                </>
-            )}
-        </>
-    )
+        return (
+            <ScrollArea className="max-h-[60vh]">
+                <div className="space-y-2 px-1">
+                    <ResultGroup
+                        title="Articles"
+                        results={results?.formattedArticles || []}
+                        type="article"
+                        onSelect={closeDialog}
+                    />
+                    <ResultGroup
+                        title="Documents"
+                        results={results?.formattedDocuments || []}
+                        type="document"
+                        onSelect={closeDialog}
+                    />
+                    <ResultGroup
+                        title="Services"
+                        results={results?.formattedServices || []}
+                        type="service"
+                        onSelect={closeDialog}
+                    />
+                </div>
+            </ScrollArea>
+        )
+    }, [isLoading, error, hasResults, debouncedSearch, results, closeDialog])
 
     return (
         <>
-            <Button
-                className="relative bg-transparent border-none hover:bg-transparent hover:text-primary text-primary p-0"
-                onClick={() => setOpen(true)}
-            >
-                <Search className="text-3xl" />
-            </Button>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                    <span className="text-primary">
+                        <Search className="w-6 h-6" />
+                    </span>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[550px] p-0 border-primary/20 shadow-lg overflow-auto">
+                    <DialogHeader className="px-4 pt-5 pb-0">
+                        <DialogTitle className="sr-only">Recherche</DialogTitle>
+                        <div className="flex items-center border-b pb-4">
+                            <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Input
+                                placeholder="Rechercher dans les articles, documents, services..."
+                                value={search}
+                                onChange={handleSearchChange}
+                                className="flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:ring-0"
+                                autoFocus
+                            />
 
-            <CommandDialog open={open} onOpenChange={setOpen}>
-                <CommandInput
-                    placeholder="Rechercher dans les articles, documents, services..."
-                    value={search}
-                    onValueChange={setSearch}
-                />
-                <CommandList>
-                    <CommandEmpty>
-                        {isLoading && renderLoadingState()}
-                    </CommandEmpty>
-                    {renderResults()}
-                </CommandList>
-            </CommandDialog>
+                        </div>
+                    </DialogHeader>
+                    <div className="px-4 py-2">{renderContent()}</div>
+                </DialogContent>
+            </Dialog>
         </>
     )
 }
-

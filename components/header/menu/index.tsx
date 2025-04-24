@@ -7,7 +7,7 @@ import { SearchDialog } from "../search"
 function Menu() {
     return (
         <NavigationMenu className="w-full hidden md:block">
-            <NavigationMenuList>
+            <NavigationMenuList className="items-center">
                 {MENU.map((item) => (
                     <MenuItem key={item.label} label={item.label} href={item.href} subMenu={item?.submenus || []} />
                 ))}

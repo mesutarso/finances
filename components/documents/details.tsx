@@ -3,19 +3,10 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Share2, Download, ZoomIn, ZoomOut } from "lucide-react"
+import { Share2, Download } from "lucide-react"
+import PdfViewer from "./pdf-viewer"
 
-export default function PDFViewer({ document }: { document: any }) {
-    const [scale, setScale] = useState(1.0)
-
-    function zoomIn() {
-        setScale((prevScale) => Math.min(prevScale + 0.2, 2.5))
-    }
-
-    function zoomOut() {
-        setScale((prevScale) => Math.max(prevScale - 0.2, 0.5))
-    }
-
+export default function DocumentDetails({ document }: { document: any }) {
     function formatDate(dateString: string) {
         const date = new Date(dateString)
         return new Intl.DateTimeFormat("fr-FR", {
@@ -43,26 +34,26 @@ export default function PDFViewer({ document }: { document: any }) {
     }
 
     return (
-        <div className="container mx-auto py-8 px-4">
-            <Card className="mb-6">
-                <CardHeader>
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+        <div className="container mx-auto py-4 sm:py-6 md:py-8 px-2 sm:px-4">
+            <Card className="mb-4 sm:mb-6">
+                <CardHeader className="p-3 sm:p-4 md:p-6">
+                    <div className="flex flex-col gap-3 sm:gap-4">
                         <div>
-                            <CardTitle className="text-2xl capitalize">{document.titre}</CardTitle>
-                            <div className="flex flex-wrap gap-2 mt-2">
-                                <Badge variant="outline">{document.type}</Badge>
-                                <Badge>{document.categories}</Badge>
-                                <Badge variant="default">Publié le {formatDate(document.date_publication)}</Badge>
+                            <CardTitle className="text-xl sm:text-2xl capitalize line-clamp-2">{document.titre}</CardTitle>
+                            <div className="flex flex-wrap gap-1 sm:gap-2 mt-2">
+                                <Badge variant="outline" className="text-xs sm:text-sm">{document.type}</Badge>
+                                <Badge className="text-xs sm:text-sm">{document.categories}</Badge>
+                                <Badge variant="default" className="text-xs sm:text-sm">Publié le {formatDate(document.date_publication)}</Badge>
                             </div>
                         </div>
-                        <div className="flex gap-2">
-                            <Button variant="outline" size="sm" onClick={shareDocument}>
-                                <Share2 className="mr-2 h-4 w-4" />
+                        <div className="flex flex-wrap gap-2">
+                            <Button variant="outline" size="sm" onClick={shareDocument} className="text-xs sm:text-sm h-8 sm:h-9">
+                                <Share2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                                 Partager
                             </Button>
-                            <Button variant="outline" size="sm" asChild>
+                            <Button variant="outline" size="sm" asChild className="text-xs sm:text-sm h-8 sm:h-9">
                                 <a href={document.fichier} download={`${document.titre}.pdf`}>
-                                    <Download className="mr-2 h-4 w-4" />
+                                    <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                                     Télécharger
                                 </a>
                             </Button>
@@ -71,30 +62,9 @@ export default function PDFViewer({ document }: { document: any }) {
                 </CardHeader>
             </Card>
 
-            <Card>
-                <CardContent className="p-6">
-                    <div className="flex flex-col items-center">
-                        <div className="bg-muted p-4 rounded-lg mb-4 w-full max-w-4xl">
-                            <div className="flex justify-center mb-4">
-                                <div className="flex items-center space-x-2">
-                                    <Button variant="outline" size="icon" onClick={zoomOut} disabled={scale <= 0.5}>
-                                        <ZoomOut className="h-4 w-4" />
-                                    </Button>
-                                    <span className="text-sm">{Math.round(scale * 100)}%</span>
-                                    <Button variant="outline" size="icon" onClick={zoomIn} disabled={scale >= 2.5}>
-                                        <ZoomIn className="h-4 w-4" />
-                                    </Button>
-                                </div>
-                            </div>
-                            <iframe
-                                src={`${document.fichier}#toolbar=0&navpanes=0&scrollbar=0&zoom=${scale * 100}`}
-                                className="w-full h-[900px] border-0"
-                                title={document.titre}
-                                allowFullScreen
-                            />
-
-                        </div>
-                    </div>
+            <Card className="overflow-hidden">
+                <CardContent className="p-0 sm:p-2 md:p-4 h-full">
+                    <PdfViewer url={document.fichier} />
                 </CardContent>
             </Card>
         </div>

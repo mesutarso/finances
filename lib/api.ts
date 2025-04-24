@@ -12,6 +12,7 @@ export async function searchApi(query: string) {
     return { articles: [], documents: [], services: [] };
 
   const { data: articles } = await articlesCollection.find({
+    sort: ["date_publication:desc"],
     filters: {
       titre: {
         $contains: query,
@@ -20,6 +21,7 @@ export async function searchApi(query: string) {
   });
 
   const { data: documents } = await ressourcesCollection.find({
+    sort: ["date_publication:desc"],
     filters: {
       titre: {
         $contains: query,
@@ -28,6 +30,7 @@ export async function searchApi(query: string) {
   });
 
   const { data: services } = await servicesCollection.find({
+    sort: ["createdAt:desc"],
     filters: {
       titre: {
         $contains: query,
@@ -50,7 +53,7 @@ export async function searchApi(query: string) {
     date: format(new Date(document.date_publication), "dd/MM/yyyy", {
       locale: fr,
     }),
-    link: document.slug,
+    link: document.documentId,
   }));
 
   const formattedServices = services.map((service) => ({
