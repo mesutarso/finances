@@ -14,7 +14,7 @@ interface ScrollToTopButtonProps {
 }
 
 export function ScrollToTopButton({
-    threshold = 50,
+    threshold = 30,
     className,
     position = "right",
     offset = 20,
@@ -78,7 +78,7 @@ export function ScrollToTopButton({
                 >
                     <Button
                         className={cn(
-                            "rounded-full p-3 shadow-lg bg-white text-black hover:bg-gray-100 hover:text-black focus:ring-2 focus:ring-gray-300",
+                            "rounded-full p-3 shadow-lg bg-blue text-white hover:bg-blue/80 hover:text-white focus:ring-2 focus:ring-gray-300",
                             "transition-all duration-300 hover:shadow-xl",
                             className,
                         )}
