@@ -127,22 +127,18 @@ export default function Home() {
                                         </motion.p>
                                         <motion.div className="flex flex-col sm:flex-row gap-4 justify-start" variants={itemVariants}>
                                             <Link href="/programme">
-                                                <Button className="relative bg-primary text-white font-medium px-6 py-3 overflow-hidden group border-2 border-primary hover:border-primary">
-                                                    <span className="absolute cursor-pointer w-0 h-full bg-white left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
-                                                    <span className="relative cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
-                                                        Programme du ministre
-                                                    </span>
+                                                <Button className="relative bg-primary text-white font-medium px-6 py-3 overflow-hidden   hover:bg-white hover:text-primary transition-all duration-300 ease-in-out">
+                                                    Programme du ministre
+
                                                 </Button>
                                             </Link>
                                             <Link href="/contact">
                                                 <Button
-                                                    variant="outline"
-                                                    className="relative border-primary text-primary font-medium px-6 py-3 overflow-hidden group"
+
+                                                    className="relative cursor-pointer bg-white   text-primary font-medium px-6 py-3 overflow-hidden  hover:bg-yellow hover:text-white transition-all duration-300 ease-in-out"
                                                 >
-                                                    <span className="absolute cursor-pointer  w-0 h-full bg-yellow left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
-                                                    <span className="relative cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
-                                                        Contactez nous
-                                                    </span>
+                                                    Contactez nous
+
                                                 </Button>
                                             </Link>
                                         </motion.div>
