@@ -44,8 +44,8 @@ export default function ContactInfo() {
                         <div>
                             <h3 className="font-medium text-gray-900">Email</h3>
                             <p className="text-gray-600 mt-1">
-                                <a href="mailto:contact@finances.gouv.cd" className="hover:text-primary transition-colors">
-                                    contact@finances.gouv.cd
+                                <a href="mailto:cabinet@finances.gouv.cd" className="hover:text-primary transition-colors">
+                                    cabinet@finances.gouv.cd
                                 </a>
                             </p>
                         </div>
@@ -58,8 +58,8 @@ export default function ContactInfo() {
                         <div>
                             <h3 className="font-medium text-gray-900">Téléphone</h3>
                             <p className="text-gray-600 mt-1">
-                                <a href="tel:+33123456789" className="hover:text-primary transition-colors">
-                                    +243 (0)1 23 45 67 89
+                                <a href="tel:+243829999945" className="hover:text-primary transition-colors">
+                                    +243 82 99 99 945
                                 </a>
                             </p>
                         </div>

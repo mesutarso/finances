@@ -15,7 +15,7 @@ function Infos() {
                 <div className="flex flex-col gap-2">
                     <p className="flex items-center gap-2">
                         <Phone className="w-4 h-4" />
-                        +243 999 999 999
+                        +243 82 99 99 945
                     </p>
                     <p className="flex items-center gap-2">
                         <Mail className="w-4 h-4" />
