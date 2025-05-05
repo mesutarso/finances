@@ -31,9 +31,9 @@ export function DataTablePagination({
             <div className="flex items-center space-x-6 lg:space-x-8">
                 <div className="flex items-center space-x-2">
                     <p className="text-lg font-medium">Documents par page</p>
-                    <Select value={`${pageSize}`} onValueChange={(value) => onPageSizeChange(Number(value))}>
+                    <Select defaultValue={`${pageSize}`} onValueChange={(value) => onPageSizeChange(Number(value))}>
                         <SelectTrigger className="h-8 w-[70px]">
-                            <SelectValue placeholder={pageSize} />
+                            <SelectValue className="text-black" />
                         </SelectTrigger>
                         <SelectContent side="top">
                             {[10, 20, 30, 40, 50].map((size) => (

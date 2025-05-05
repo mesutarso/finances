@@ -5,7 +5,7 @@ import Drawer from "./drawer";
 
 function Header() {
     return (
-        <header className=" p-2 shadow-sm bg-white sticky top-0 z-50 ">
+        <header className=" py-2 shadow-sm bg-white sticky top-0 z-50 ">
             <div className="container flex items-center justify-between">
                 <Logo type="dark" />
                 <Menu />

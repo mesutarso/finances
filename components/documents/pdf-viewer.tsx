@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
-import { Download, ZoomIn, ZoomOut, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Download, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react'
 
 import 'react-pdf/dist/Page/TextLayer.css'
 import { cn } from '@/lib/utils'
@@ -23,9 +23,11 @@ export default function PdfViewer({ url }: PdfViewerProps) {
     const [numPages, setNumPages] = useState<number>()
     const [currentPage, setCurrentPage] = useState<number>(1)
     const [scale, setScale] = useState<number>(1)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
         setNumPages(numPages)
+        setIsLoading(false)
     }
 
     const handleZoomIn = () => {
@@ -76,21 +78,24 @@ export default function PdfViewer({ url }: PdfViewerProps) {
                 </Button>
             </div>
 
-            <ScrollArea className=" w-full">
+            <ScrollArea className="w-full">
+                {isLoading && (
+                    <div className="flex items-center justify-center h-[calc(100vh-theme(spacing.24))]">
+                        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                    </div>
+                )}
                 <Document
                     file={url}
                     onLoadSuccess={onDocumentLoadSuccess}
-                    loading={<Skeleton className="flex-1 w-full h-[calc(100vh-theme(spacing.24))]" />}
+                    loading={null}
                 >
-                    {numPages && (
-                        <Page
-                            pageNumber={currentPage}
-                            renderTextLayer={true}
-                            renderAnnotationLayer={false}
-                            className="flex justify-center"
-                            scale={scale}
-                        />
-                    )}
+                    <Page
+                        pageNumber={currentPage}
+                        renderTextLayer={true}
+                        renderAnnotationLayer={false}
+                        className="flex justify-center"
+                        scale={scale}
+                    />
                 </Document>
             </ScrollArea>
         </div>

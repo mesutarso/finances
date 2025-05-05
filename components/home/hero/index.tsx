@@ -120,7 +120,7 @@ export default function Home() {
                                             {slide.title}
                                         </motion.h1>
                                         <motion.p
-                                            className="mb-8 text-md  max-w-2xl mx-auto md:mx-0 text-left"
+                                            className="mb-8 text-xl  max-w-2xl mx-auto md:mx-0 text-left"
                                             variants={itemVariants}
                                         >
                                             {slide.description}
