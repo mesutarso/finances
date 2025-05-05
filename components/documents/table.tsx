@@ -4,10 +4,11 @@ import { type ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tan
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Badge } from "@/components/ui/badge"
-import { FileIcon, ExternalLinkIcon, DownloadIcon } from "lucide-react"
+import { FileIcon, ExternalLinkIcon, DownloadIcon, Share2 } from "lucide-react"
 import type { Document } from "@/types/documents"
 import { formatDate } from "@/lib/utils"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export function DocumentsTable({
     data,
@@ -18,6 +19,23 @@ export function DocumentsTable({
     isLoading: boolean
     isError: boolean
 }) {
+    function shareDocument(document: Document) {
+        if (navigator.share) {
+            navigator
+                .share({
+                    title: document.titre,
+                    text: `${document.titre} - ${document.type}`,
+                    url: window.location.href,
+                })
+                .catch((error) => console.log("Error sharing", error))
+        } else {
+            navigator.clipboard
+                .writeText(window.location.href)
+                .then(() => alert("Lien copié dans le presse-papier"))
+                .catch((error) => console.error("Erreur lors de la copie du lien", error))
+        }
+    }
+
     const columns: ColumnDef<Document>[] = [
         {
             accessorKey: "titre",
@@ -67,6 +85,7 @@ export function DocumentsTable({
                 return (
                     <div className="flex items-center gap-2">
                         {document.fichier?.url && (
+
                             <a
                                 href={`${document.fichier.url || document?.url}?download=true`}
                                 target="_blank"
@@ -76,6 +95,7 @@ export function DocumentsTable({
                                 <DownloadIcon className="h-4 w-4" />
                                 <span className="sr-only">Télécharger</span>
                             </a>
+
                         )}
                         {document && (
                             <Link
@@ -86,6 +106,9 @@ export function DocumentsTable({
                                 <span className="sr-only">Voir le lien</span>
                             </Link>
                         )}
+                        <Button variant="outline" size="sm" onClick={() => shareDocument(document)} className="text-xs sm:text-sm h-8  rounded-md border">
+                            <Share2 className=" h-3 w-3 sm:h-4 sm:w-4" />
+                        </Button>
                     </div>
                 )
             },

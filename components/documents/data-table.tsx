@@ -1,5 +1,4 @@
 "use client"
-
 import type React from "react"
 
 import { useState, useLayoutEffect, useEffect } from "react"
@@ -25,16 +24,15 @@ export function DocumentsDataTable({ categorie }: { categorie: string }) {
     })
     const [showFilters, setShowFilters] = useState(false)
 
-    // Mettre à jour les filtres lorsque la catégorie change
     useEffect(() => {
         setFilters(prevFilters => ({
             ...prevFilters,
             type: categorie ? categorie : categorie === "Autres publications" ? null : null
         }));
-        setPage(1); // Réinitialiser à la première page
+        setPage(1);
     }, [categorie]);
 
-    // Query Strapi for documents with pagination and filters
+
     const { data, isLoading, isError } = useQuery({
         queryKey: ["documents", page, pageSize, search, filters],
         queryFn: () => fetchDocuments({ page, pageSize, search, filters }),
@@ -46,7 +44,7 @@ export function DocumentsDataTable({ categorie }: { categorie: string }) {
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
-        setPage(1) // Reset to first page when search changes
+        setPage(1)
     }
 
     const handleFiltersChange = (newFilters: DocumentFilters) => {
