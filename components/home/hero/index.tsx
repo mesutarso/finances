@@ -81,7 +81,7 @@ export default function Home() {
 
     return (
         <section id="hero">
-            <div className="relative min-h-[600px] w-full overflow-hidden">
+            <div className="relative min-h-[650px] w-full overflow-hidden">
                 {slides?.map((slide: any, index: number) => (
                     <div
                         key={slide.id}
