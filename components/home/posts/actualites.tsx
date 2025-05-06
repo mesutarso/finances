@@ -25,7 +25,7 @@ function Posts() {
     const [thematique, setThematique] = useState('')
     const [pageCount, setPageCount] = useState(0)
     const [totalItems, setTotalItems] = useState(0)
-    const [title, setTitle] = useState("Toute l'actualité du ministère")
+    const [title, setTitle] = useState("L'actualité du Ministère")
 
 
     const { data, isLoading } = useQuery(getAllArticlesQuery(page, pageSize, thematique))
@@ -238,7 +238,7 @@ function Posts() {
                         </div>
                         {/* @ts-ignore */}
                         {categories?.map((category: any, index: number) => (
-                            <div key={index} className="flex items-center gap-2 cursor-pointer" onClick={() => handleThematiqueChange(category.documentId, `Categorie : ${category.nom}`)}>
+                            <div key={index} className="flex items-center gap-2 cursor-pointer" onClick={() => handleThematiqueChange(category.documentId, `Catégorie : ${category.nom}`)}>
                                 <p>{category.nom}</p>
                                 <Badge>{category.totalArticles}</Badge>
                             </div>

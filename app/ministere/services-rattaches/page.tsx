@@ -93,19 +93,12 @@ function ServicesConnexes() {
 
 
 
-
-
-
-
-
-
     ]
     return (
         <div className="container section">
             <div className="mb-8 text-center">
-                <h1 className="text-3xl font-bold mb-2 text-primary">Services Connexes</h1>
-                <h2 className="text-xl font-bold mb-2">Ministère des Finances</h2>
-                <p className="text-xl text-muted-foreground">République Démocratique du Congo</p>
+                <h1 className="text-3xl font-bold mb-2 text-primary">Services rattachés au Ministère des Finances</h1>
+
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {departments.map((department, index) => (
@@ -115,7 +108,7 @@ function ServicesConnexes() {
                             <div className="text-primary">{department.icon}</div>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-sm text-muted-foreground">{department.name}</p>
+                            <p className="text-md text-muted-foreground">{department.name}</p>
                         </CardContent>
                     </Card>
                 ))}

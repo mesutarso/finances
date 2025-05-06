@@ -7,12 +7,13 @@ import Image from "next/image"
 
 interface CabinetSectionProps {
     title: string
-    members: any[]
+    members: any
     level: "primary" | "secondary" | "tertiary" | "quaternary"
     className?: string
+    type?: 'single' | 'double'
 }
 
-export function CabinetSection({ title, members, level, className = "" }: CabinetSectionProps) {
+export function CabinetSection({ title, members, level, className = "", type = 'single' }: CabinetSectionProps) {
     const container = {
         hidden: { opacity: 0 },
         show: {
@@ -29,27 +30,13 @@ export function CabinetSection({ title, members, level, className = "" }: Cabine
         show: { y: 0, opacity: 1 },
     }
 
-    const getSectionBgColor = () => {
-        switch (level) {
-            case "primary":
-                return "bg-blue-50"
-            case "secondary":
-                return "bg-red-50"
-            case "tertiary":
-                return "bg-yellow-50"
-            case "quaternary":
-                return "bg-green-50"
-            default:
-                return "bg-gray-50"
-        }
-    }
+
 
     return (
-        <section className={`${getSectionBgColor()} rounded-lg py-8 px-6 mb-4 ${className}`}>
+        <section className={`rounded-lg py-8 px-6 mb-4 ${className}`}>
             <h2 className="text-2xl font-semibold mb-8 text-center">{title}</h2>
-
             <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center w-full"
+                className={`  mx-auto ${type === 'double' ? 'grid grid-cols-2 gap-16 max-w-2xl' : 'max-w-sm min-h-[300px]'}`}
                 variants={container}
                 initial="hidden"
                 animate="show"
@@ -72,33 +59,19 @@ interface MemberCardProps {
 }
 
 function MemberCard({ name, role, image, level }: MemberCardProps) {
-    const getBgColor = () => {
-        switch (level) {
-            case "primary":
-                return "bg-white border-blue-200"
-            case "secondary":
-                return "bg-white border-red-200"
-            case "tertiary":
-                return "bg-white border-yellow-200"
-            case "quaternary":
-                return "bg-white border-green-200"
-            default:
-                return "bg-white border-gray-200"
-        }
-    }
 
     return (
         <motion.div
             whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
         >
-            <Card className={`overflow-hidden border-2 p-0 ${getBgColor()}`}>
-                <div className="relative h-68 w-full">
-                    <Image src={image || "/placeholder.svg"} alt={name} fill className="object-cover" />
+            <Card className={`overflow-hidden h-[450px] border border-neutral-50 p-0 shadow-lg `}>
+                <div className="relative h-[80%] w-full">
+                    <Image src={image || "/placeholder.svg"} alt={name} fill className="object-cover w-full" />
                 </div>
-                <CardContent className="p-4 text-center">
-                    <h3 className="font-semibold text-lg">{name}</h3>
-                    <p className="text-sm text-gray-600">{role}</p>
+                <CardContent className="p-2 text-center mb-6">
+                    <h3 className="font-semibold text-xl text-primary">{name}</h3>
+                    <p className="text-lg text-black">{role}</p>
                 </CardContent>
             </Card>
         </motion.div>

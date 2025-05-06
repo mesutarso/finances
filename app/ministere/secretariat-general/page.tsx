@@ -49,9 +49,8 @@ function SecretaireGeneral() {
     return (
         <div className="container section">
             <div className="mb-8 text-center">
-                <h1 className="text-3xl font-bold mb-2 text-primary">Secrétaire Général</h1>
+                <h1 className="text-3xl font-bold mb-2 text-primary">Secrétariat Général</h1>
                 <h2 className="text-xl font-bold mb-2">Ministère des Finances</h2>
-                <p className="text-xl text-muted-foreground">République Démocratique du Congo</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {departments.map((department, index) => (
@@ -61,7 +60,7 @@ function SecretaireGeneral() {
                             <div className="text-primary">{department.icon}</div>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-sm text-muted-foreground">{department.name}</p>
+                            <p className="text-md text-muted-foreground">{department.name}</p>
                         </CardContent>
                     </Card>
                 ))}

@@ -9,7 +9,7 @@ import { latestArticlesQuery } from "@/lib/react-query/articles/options";
 function HomePosts() {
     const { data: articles } = useQuery(latestArticlesQuery);
     return (
-        <div className="container section space-y-8">
+        <div className="container section space-y-16">
 
             <Heading title="À la une" color="blue" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -17,11 +17,11 @@ function HomePosts() {
                     <PostCard key={article.link} {...article} />
                 ))}
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center ">
                 <Link href="/actualites">
-                    <Button className="relative w-fit bg-primary text-white px-8 py-4 overflow-hidden group border-2 border-primary hover:border-primary">
+                    <Button className="relative w-fit bg-primary text-white px-8 py-4 overflow-hidden group border border-neutral-50 hover:shadow-md">
                         <span className="absolute cursor-pointer w-0 h-full bg-white left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
-                        <span className="relative cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
+                        <span className="relative cursor-pointer font-semibold z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
                             Voir toutes les actualités
                         </span>
                     </Button>

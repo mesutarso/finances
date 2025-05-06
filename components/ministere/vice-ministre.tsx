@@ -20,15 +20,16 @@ function ViceMinistreContent() {
         <div className="container section">
             <div className="mb-8 text-center">
                 <h1 className="text-3xl font-bold mb-2 text-primary">{data?.noms}</h1>
-                <h2 className="text-xl font-bold mb-2">Vice Ministre des Finances</h2>
-                <p className="text-xl text-muted-foreground">République Démocratique du Congo</p>
+                <h2 className="text-xl font-bold mb-2">Vice-Ministre des Finances</h2>
+
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid gap-12 md:grid-cols-2">
                 <div className="flex flex-col items-center">
-                    <Card className="w-full max-w-md overflow-hidden p-0">
+                    <Card className="w-full overflow-hidden p-0">
                         <CardContent className="p-0">
                             <Image
+                                // @ts-ignore
                                 src={data?.portrait}
                                 alt="Portrait du Ministre des Finances"
                                 width={400}

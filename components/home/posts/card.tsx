@@ -78,7 +78,7 @@ function PostCard({
                     </CardHeader>
                     <CardContent className="pb-8 flex justify-between items-center">
                         {categorie && (
-                            <p className="text-sm font-medium bg-blue-500 text-white px-2 py-1 rounded-md">{categorie}</p>
+                            <p className="text-sm font-medium bg-blue-500 text-white px-2 py-1 uppercase ">{categorie}</p>
                         )}
                         <p className="text-sm text-gray-800 mt-2 font-bold">{date}</p>
                     </CardContent>

@@ -130,8 +130,8 @@ LoadingState.displayName = "LoadingState"
 
 const EmptyState = memo(({ query }: { query: string }) => (
     <div className="flex flex-col items-center justify-center py-8 text-center">
-        <p className="text-sm text-muted-foreground">
-            {!query || query.length < 2 ? "Commencez à taper pour rechercher..." : `Aucun résultat trouvé pour "${query}"`}
+        <p className="text-lg text-muted-foreground">
+            {!query || query.length < 2 ? "Tapez pour rechercher..." : `Aucun résultat trouvé pour "${query}"`}
         </p>
     </div>
 ), (prevProps, nextProps) => prevProps.query === nextProps.query)
@@ -293,7 +293,7 @@ export function SearchDialog() {
                                 placeholder="Rechercher dans les articles, documents, services..."
                                 value={search}
                                 onChange={handleSearchChange}
-                                className="flex-1 border-0 bg-transparent p-0 shadow-none focus-visible:ring-0"
+                                className="flex-1 border-0 bg-transparent text-lg p-0 shadow-none focus-visible:ring-0 placeholder:text-lg"
                                 autoFocus
                             />
 

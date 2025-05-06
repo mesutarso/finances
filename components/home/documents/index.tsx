@@ -18,7 +18,7 @@ function HomeDocuments() {
 
     return (
         <section className="bg-white">
-            <div className="container section space-y-8">
+            <div className="container section space-y-16">
                 <Heading title="Documents récents" color="yellow" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {isLoading ? (
@@ -38,9 +38,9 @@ function HomeDocuments() {
                 </div>
                 <div className="flex justify-center">
                     <Link href="/ressources">
-                        <Button className="relative w-fit bg-yellow text-primary px-8 py-4 overflow-hidden group border-2 border-yellow hover:border-primary">
+                        <Button className="relative w-fit bg-yellow text-primary px-8 py-4 overflow-hidden group border border-neutral-50 hover:shadow-md">
                             <span className="absolute cursor-pointer w-0 h-full bg-white left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
-                            <span className="relative cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
+                            <span className="relative cursor-pointer font-semibold z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">
                                 Voir toutes les ressources
                             </span>
                         </Button>

@@ -24,8 +24,8 @@ export const MENU = [
         href: "/ministere/secretariat-general",
       },
       {
-        label: "Les Services connexes",
-        href: "/ministere/services-connexes",
+        label: "Les Services rattachés",
+        href: "/ministere/services-rattaches",
       },
       {
         label: "Les régies financières",
@@ -140,8 +140,8 @@ export const MINISTERE = [
     href: "/ministere/secretariat-general",
   },
   {
-    label: "Les Services connexes",
-    href: "/ministere/services-connexes",
+    label: "Les Services rattachés",
+    href: "/ministere/services-rattaches",
   },
   {
     label: "Les régies financières",

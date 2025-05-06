@@ -127,7 +127,7 @@ export default function Home() {
                                         </motion.p>
                                         <motion.div className="flex flex-col sm:flex-row gap-4 justify-start" variants={itemVariants}>
                                             <Link href="/ministere/ministre">
-                                                <Button className="relative bg-primary text-white font-medium px-6 py-3 overflow-hidden   hover:bg-white hover:text-primary transition-all duration-300 ease-in-out">
+                                                <Button className="relative bg-primary text-white font-semibold px-6 py-3 overflow-hidden   hover:bg-white hover:text-primary transition-all duration-300 ease-in-out">
                                                     Programme du ministre
 
                                                 </Button>
@@ -135,7 +135,7 @@ export default function Home() {
                                             <Link href="/contact">
                                                 <Button
 
-                                                    className="relative cursor-pointer bg-white   text-primary font-medium px-6 py-3 overflow-hidden  hover:bg-yellow hover:text-white transition-all duration-300 ease-in-out"
+                                                    className="relative cursor-pointer bg-white   text-primary font-semibold  px-6 py-3 overflow-hidden  hover:bg-yellow hover:text-white transition-all duration-300 ease-in-out"
                                                 >
                                                     Contactez nous
 

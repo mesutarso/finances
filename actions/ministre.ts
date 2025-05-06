@@ -22,18 +22,30 @@ export const getMinistre = async () => {
 
 export const getCabinet = async () => {
   const { data } = await cabinet.find({
-    populate: [
-      "Dircab.portrait",
-      "Dircaba.portrait",
-      "Coordonnateur.portrait",
-      "Conseillers.portrait",
-    ],
+    populate: ["Dircab.portrait", "Dircaba.portrait", "Coordonnateur.portrait"],
   });
   return {
-    dircab: data.Dircab,
-    dircaba: data.Dircaba,
-    coordonnateurs: data.Coordonnateur,
-    conseillers: data.Conseillers,
+    dircab: {
+      noms: data.Dircab.noms,
+      fonction: data.Dircab.fonction,
+      portrait: data?.Dircab?.portrait?.url
+        ? `${process.env.IMAGE_URL}${data?.Dircab?.portrait?.url}`
+        : null,
+    },
+    dircaba: data.Dircaba?.map((item: any) => ({
+      noms: item.noms,
+      fonction: item.fonction,
+      portrait: item?.portrait?.url
+        ? `${process.env.IMAGE_URL}${item?.portrait?.url}`
+        : null,
+    })),
+    coordonnateurs: data.Coordonnateur?.map((item: any) => ({
+      noms: item.noms,
+      fonction: item.fonction,
+      portrait: item?.portrait?.url
+        ? `${process.env.IMAGE_URL}${item?.portrait?.url}`
+        : null,
+    })),
   };
 };
 

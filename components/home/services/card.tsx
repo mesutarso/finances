@@ -1,5 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartNoAxesCombined, DatabaseZap, MonitorCog } from "lucide-react"
 
 const icons = [ChartNoAxesCombined, DatabaseZap, MonitorCog];
@@ -28,9 +27,7 @@ function ServiceCard({ title, description, link, type }: ServiceCardProps) {
                     </div>
                 </CardHeader>
 
-                <CardContent>
-                    <Badge variant="outline" className="text-xs transition-all duration-300 ease-in-out group-hover:text-white group-hover:border-white/50 group-hover:bg-transparent">{type || 'Service'}</Badge>
-                </CardContent>
+
             </Card>
         </a>
     )

@@ -10,18 +10,18 @@ function HomeServices() {
     const { data: services } = useQuery(latestServicesQuery);
     return (
         <section className="bg-gray-50">
-            <div className="container section space-y-8">
+            <div className="container section space-y-16">
                 <Heading title="Nos services" color="red" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {services?.map((service: any) => (
                         <ServiceCard key={service.link} {...service} />
                     ))}
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center ">
                     <Link href="/services">
-                        <Button className="relative w-fit bg-red text-white px-8 py-4 overflow-hidden group border-2 border-red hover:border-red">
+                        <Button className="relative w-fit bg-red text-white px-8 py-4 overflow-hidden group border border-neutral-50 hover:shadow-md">
                             <span className="absolute cursor-pointer w-0 h-full bg-white left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
-                            <span className="relative cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-red">
+                            <span className="relative font-semibold cursor-pointer z-10 transition-colors duration-500 ease-in-out group-hover:text-red">
                                 Voir tous les services
                             </span>
                         </Button>

@@ -7,7 +7,7 @@ function Useful() {
             <h3 className="text-xl font-bold mb-4">Liens utiles</h3>
             <ul className="flex flex-col gap-2">
                 {USEFULSLINKS.map((link) => (
-                    <li key={link.label} className="text-md text-gray-50 hover:text-white transition-all duration-300 ease-in-out hover:translate-x-2">
+                    <li key={link.label} className="text-md text-white font-medium text-md hover:text-yellow transition-all duration-300 ease-in-out hover:translate-x-2">
                         <Link href={link.href}>
                             {link.label}
                         </Link>

@@ -54,9 +54,9 @@ function AnciensMinistresContent() {
 
 
                         </div>
-                        <div className="p-6 text-center">
-                            <h3 className="text-md font-bold text-gray-800 mb-2">{ministre.noms}</h3>
-                            <p className="text-gray-600 text-xs">{ministre.periode}</p>
+                        <div className="p-4 text-center">
+                            <h3 className="text-lg font-bold text-gray-800 mb-2">{ministre.noms}</h3>
+                            <p className="text-gray-600 text-sm">{ministre.periode}</p>
                         </div>
                     </motion.div>
                 ))}
