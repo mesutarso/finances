@@ -15,7 +15,7 @@ export default function Home() {
             title: "Ministère des Finances",
             description:
                 "Gestion des finances publiques, politique économique et financière, budget de l'État, dette publique, impôts, régulation financière.",
-            image: "/cfk.jpeg",
+            image: "/centre-financier.webp",
         },
 
 
