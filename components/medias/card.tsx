@@ -24,7 +24,7 @@ export function EventCard({ event }: EventCardProps) {
     return (
         <Link href={`/ressources/photos-et-videos/${event.slug}`} legacyBehavior passHref className="cursor-pointer">
             <Card className="overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow pt-0">
-                <div className="relative h-48 w-full">
+                <div className="relative h-60 w-full">
                     <Image
                         src={event.cover}
                         alt={event.titre}
@@ -38,7 +38,7 @@ export function EventCard({ event }: EventCardProps) {
                         </div>
                     )}
                 </div>
-                <CardHeader className="pb-2">
+                <CardHeader className="">
                     <h3 className="text-xl font-semibold line-clamp-2">{event.titre}</h3>
                 </CardHeader>
                 <CardContent className="flex-grow">

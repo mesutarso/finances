@@ -79,7 +79,7 @@ export default function ContactForm() {
             <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                        <Label htmlFor="nom" className="text-gray-700">
+                        <Label htmlFor="nom" className="text-gray-700 text-lg">
                             Nom
                         </Label>
                         <Input
@@ -93,7 +93,7 @@ export default function ContactForm() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="prenom" className="text-gray-700">
+                        <Label htmlFor="prenom" className="text-gray-700 text-lg">
                             Prénom
                         </Label>
                         <Input
@@ -110,7 +110,7 @@ export default function ContactForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                        <Label htmlFor="email" className="text-gray-700">
+                        <Label htmlFor="email" className="text-gray-700 text-lg">
                             Email
                         </Label>
                         <Input
@@ -125,7 +125,7 @@ export default function ContactForm() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="telephone" className="text-gray-700">
+                        <Label htmlFor="telephone" className="text-gray-700 text-lg">
                             Téléphone
                         </Label>
                         <Input
@@ -142,7 +142,7 @@ export default function ContactForm() {
                 </div>
 
                 <div className="space-y-2">
-                    <Label htmlFor="sujet" className="text-gray-700">
+                    <Label htmlFor="sujet" className="text-gray-700 text-lg">
                         Sujet
                     </Label>
                     <Input
@@ -157,7 +157,7 @@ export default function ContactForm() {
                 </div>
 
                 <div className="space-y-2">
-                    <Label htmlFor="message" className="text-gray-700">
+                    <Label htmlFor="message" className="text-gray-700 text-lg">
                         Message
                     </Label>
                     <Textarea
@@ -166,7 +166,7 @@ export default function ContactForm() {
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="Votre message..."
-                        className="min-h-[150px] border-gray-200 focus:border-primary focus:ring-primary"
+                        className="min-h-[150px] border-gray-200 focus:border-primary focus:ring-primary text-lg"
                         required
                     />
                 </div>

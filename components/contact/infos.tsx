@@ -4,7 +4,7 @@ export default function ContactInfo() {
     return (
         <div className="space-y-8">
             <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                <h2 className="text-2xl font-semibold mb-6 text-gray-900 flex items-center">
+                <h2 className="text-2xl font-semibold mb-6 text-gray-900 flex items-center ">
                     <MapPin className="h-6 w-6 text-primary mr-2" />
                     Adresse
                 </h2>
@@ -17,6 +17,7 @@ export default function ContactInfo() {
                         allowFullScreen={true}
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
+                        className="w-full h-full"
                     />
                 </div>
 
@@ -26,13 +27,13 @@ export default function ContactInfo() {
                             <MapPin className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                            <h3 className="font-medium text-gray-900">Adresse</h3>
-                            <p className="text-gray-600 mt-1">
+                            <h3 className="font-semibold text-lg text-gray-900 ">Adresse</h3>
+                            <p className="text-gray-600 mt-1 text-lg">
                                 Ministère des Finances
                                 <br />
                                 Centre Financier de Kinshasa
                                 <br />
-                                Kinshasa, République Démocratique du Congo
+                                1 Zongotolo, Kinshasa - Gombe, RDC
                             </p>
                         </div>
                     </div>
@@ -42,8 +43,8 @@ export default function ContactInfo() {
                             <Mail className="h-5 w-5 text-white" />
                         </div>
                         <div>
-                            <h3 className="font-medium text-gray-900">Email</h3>
-                            <p className="text-gray-600 mt-1">
+                            <h3 className="font-semibold text-gray-900 text-lg">Email</h3>
+                            <p className="text-gray-600 mt-1 text-lg">
                                 <a href="mailto:cabinet@finances.gouv.cd" className="hover:text-primary transition-colors">
                                     cabinet@finances.gouv.cd
                                 </a>
@@ -51,19 +52,7 @@ export default function ContactInfo() {
                         </div>
                     </div>
 
-                    <div className="flex items-start space-x-4">
-                        <div className="bg-primary p-3 rounded-full">
-                            <Phone className="h-5 w-5 text-white" />
-                        </div>
-                        <div>
-                            <h3 className="font-medium text-gray-900">Téléphone</h3>
-                            <p className="text-gray-600 mt-1">
-                                <a href="tel:+243829999945" className="hover:text-primary transition-colors">
-                                    +243 82 99 99 945
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
