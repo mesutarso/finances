@@ -60,24 +60,24 @@ export const MENU = [
     ],
   },
   {
-    label: "Marchés des titres",
-    href: "/marches-des-titres",
+    label: "Marché des titres",
+    href: "/marche-des-titres",
     submenus: [
       {
         label: "Calendrier des émissions",
-        href: "/marches-des-titres?categorie=calendrier-des-emissions",
+        href: "/marche-des-titres?categorie=calendrier-des-emissions",
       },
       {
         label: "Annonces et résultats",
-        href: "/marches-des-titres?categorie=annonces-et-resultats",
+        href: "/marche-des-titres?categorie=annonces-et-resultats",
       },
       {
         label: "Communiqués",
-        href: "/marches-des-titres?categorie=communiques",
+        href: "/marche-des-titres?categorie=communiques",
       },
       {
         label: "Autres Publications",
-        href: "/marches-des-titres?categorie=autres-publications",
+        href: "/marche-des-titres?categorie=autres-publications",
       },
     ],
   },
