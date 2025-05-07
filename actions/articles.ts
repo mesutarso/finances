@@ -53,7 +53,9 @@ export const getArticleBySlug = async (slug: string) => {
     });
     similarArticles = getSimilarArticles?.data?.map((item: any) => ({
       title: item.titre,
-      image: `${process.env.IMAGE_URL}${item?.image?.url}`,
+      image: item?.image?.url
+        ? `${process.env.IMAGE_URL}${item?.image?.url}`
+        : null,
       date: format(new Date(item.date_publication), "dd MMMM yyyy", {
         locale: fr,
       }),
@@ -82,7 +84,9 @@ export const getArticleMetadata = async (slug: string) => {
   return {
     title: data?.titre,
     description: "Ministère des Finances",
-    image: `${process.env.IMAGE_URL}${data?.image.url}`,
+    image: data?.image?.url
+      ? `${process.env.IMAGE_URL}${data?.image.url}`
+      : null,
     url: `${process.env.APP_URL}/articles/${data?.slug}`,
     publishedTime: data?.date_publication,
     author: "CellCom Ministère des Finances",

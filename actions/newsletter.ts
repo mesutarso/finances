@@ -1,6 +1,7 @@
 "use server";
 import { newsletter } from "@/lib/strapi";
-
+import { sendNewsletterEmail } from "./mail";
+import { createStrapiCollection } from "@/lib/fetch";
 export async function findNewsletterByEmail(email: string) {
   const { data } = await newsletter.find({
     filters: {
@@ -25,9 +26,15 @@ export async function subscribeToNewsletter(
   if (isSubscribed) {
     return { success: false, error: "Vous êtes déjà abonné à la newsletter" };
   }
-  const response = await newsletter.create({
+  const response = await createStrapiCollection("newsletters", {
     email: email as string,
-    audience: "abonne",
   });
+  if (response?.data) {
+    await sendNewsletterEmail(
+      email as string,
+      "Bienvenue à la newsletter",
+      "Bienvenue à la newsletter"
+    );
+  }
   return { success: true };
 }
