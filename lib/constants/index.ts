@@ -113,7 +113,7 @@ export const USEFULSLINKS = [
     href: "/services",
   },
   {
-    label: "Marchés des titres",
+    label: "Marché des titres",
     href: "/ressources",
   },
   {
