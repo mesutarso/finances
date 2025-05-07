@@ -1,5 +1,6 @@
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { ChartNoAxesCombined, DatabaseZap, MonitorCog } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 const icons = [ChartNoAxesCombined, DatabaseZap, MonitorCog];
 
@@ -25,7 +26,11 @@ function ServiceCard({ title, description, link, type }: ServiceCardProps) {
                         <CardTitle className="text-lg font-bold line-clamp-3 ">{title}</CardTitle>
                         <CardDescription className="mt-1 text-sm line-clamp-2">{description}</CardDescription>
                     </div>
+
                 </CardHeader>
+                <CardContent className='w-[100%] flex justify-end'>
+                    <Badge variant={'outline'} className="text-xs mt-2 group-hover:text-white">service</Badge>
+                </CardContent>
 
 
             </Card>
