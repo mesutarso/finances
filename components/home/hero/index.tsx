@@ -126,7 +126,7 @@ export default function Home() {
                                             {slide.description}
                                         </motion.p>
                                         <motion.div className="flex flex-col sm:flex-row gap-4 justify-start" variants={itemVariants}>
-                                            <Link href="/ministere/ministre">
+                                            <Link href="#">
                                                 <Button className="relative bg-primary text-white font-semibold px-6 py-3 overflow-hidden   hover:bg-white hover:text-primary transition-all duration-300 ease-in-out">
                                                     Programme du ministre
 
