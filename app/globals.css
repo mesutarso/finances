@@ -148,33 +148,33 @@
 
 @layer components {
   .custom-content {
-    @apply text-gray-800 dark:text-gray-200;
+    @apply text-black;
 
-    /* Titres */
+
     & h1 {
-      @apply text-3xl font-bold text-blue-700 dark:text-blue-400 mb-4;
+      @apply text-3xl font-bold text-primary mb-4;
     }
 
     & h2 {
-      @apply text-2xl font-semibold text-blue-600 dark:text-blue-300 mb-3 mt-6;
+      @apply text-2xl font-semibold text-primary/90 mb-3 mt-6;
     }
 
     & h3 {
-      @apply text-xl font-medium text-blue-500 dark:text-blue-200 mb-2 mt-5;
+      @apply text-xl font-medium text-primary/80 mb-2 mt-5;
     }
 
-    /* Paragraphes */
+
     & p {
       @apply mb-4 leading-relaxed;
     }
 
-    /* Liens */
+
     & a {
-      @apply text-indigo-600 dark:text-indigo-400 font-medium transition-colors duration-200;
+      @apply text-primary dark:text-indigo-400 font-medium transition-colors duration-200;
       @apply hover:text-indigo-800 dark:hover:text-indigo-300 hover:underline;
     }
 
-    /* Listes */
+
     & ul {
       @apply pl-6 mb-4 space-y-2;
     }
@@ -184,16 +184,15 @@
     }
 
     & li {
-      @apply leading-relaxed;
-      @apply marker:text-indigo-500 dark:marker:text-indigo-400;
+      @apply marker:text-black dark:marker:text-black leading-relaxed text-black list-disc;
     }
 
-    /* Citations */
+
     & blockquote {
       @apply pl-4 border-l-4 border-indigo-500 dark:border-indigo-400 italic my-4 text-gray-600 dark:text-gray-300;
     }
 
-    /* Code */
+
     & pre {
       @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4;
     }
@@ -202,12 +201,15 @@
       @apply font-mono text-sm bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded;
     }
 
-    /* Images */
+
     & img {
       @apply rounded-lg max-w-full h-auto my-4;
     }
 
-    /* Tableaux */
+    & video {
+      @apply rounded-lg max-w-full h-auto my-4;
+    }
+
     & table {
       @apply w-full border-collapse mb-4;
     }
@@ -220,7 +222,7 @@
       @apply p-2 border border-gray-300 dark:border-gray-700;
     }
 
-    /* Éléments de mise en forme */
+
     & strong,
     & b {
       @apply font-bold text-gray-900 dark:text-white;
