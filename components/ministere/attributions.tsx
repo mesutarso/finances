@@ -5,8 +5,8 @@ import { texteFondateurQuery } from "@/lib/react-query/ministere/options";
 
 const Attributions = () => {
     const { data } = useQuery(texteFondateurQuery);
-    return <div className="container section prose attributions">
-        <div className="prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-p:text-base prose-a:text-primary prose-ul:list-disc prose-ol:list-decimal" dangerouslySetInnerHTML={{ __html: data?.contenu }} />
+    return <div className="container section custom-content prose max-w-none">
+        <div dangerouslySetInnerHTML={{ __html: data?.contenu }} />
     </div>
 
 };

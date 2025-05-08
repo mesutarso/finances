@@ -61,7 +61,7 @@
   --blue: #0081ec;
   --red: #b52825;
   --yellow: #EDB717;
-  --blue-dark:#111019;
+  --blue-dark: #111019;
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -86,51 +86,22 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
+
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   .container {
     @apply mx-auto max-w-7xl px-4 md:px-0;
   }
-  .section{
+
+  .section {
     @apply py-16;
   }
 }
@@ -140,6 +111,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -158,27 +130,109 @@
   animation-delay: 0.6s;
 }
 
-.attributions {
-  h1{
-    @apply text-2xl font-bold;
-  }
-  h2{
-    @apply text-xl font-bold;
-  }
-  h3{
-    @apply text-lg font-bold;
-  }
-}
+
 
 @keyframes loading {
   0% {
     width: 0%;
   }
+
   50% {
     width: 100%;
   }
+
   100% {
     width: 0%;
   }
 }
 
+@layer components {
+  .custom-content {
+    @apply text-gray-800 dark:text-gray-200;
+
+    /* Titres */
+    & h1 {
+      @apply text-3xl font-bold text-blue-700 dark:text-blue-400 mb-4;
+    }
+
+    & h2 {
+      @apply text-2xl font-semibold text-blue-600 dark:text-blue-300 mb-3 mt-6;
+    }
+
+    & h3 {
+      @apply text-xl font-medium text-blue-500 dark:text-blue-200 mb-2 mt-5;
+    }
+
+    /* Paragraphes */
+    & p {
+      @apply mb-4 leading-relaxed;
+    }
+
+    /* Liens */
+    & a {
+      @apply text-indigo-600 dark:text-indigo-400 font-medium transition-colors duration-200;
+      @apply hover:text-indigo-800 dark:hover:text-indigo-300 hover:underline;
+    }
+
+    /* Listes */
+    & ul {
+      @apply pl-6 mb-4 space-y-2;
+    }
+
+    & ol {
+      @apply pl-6 mb-4 space-y-2 list-decimal;
+    }
+
+    & li {
+      @apply leading-relaxed;
+      @apply marker:text-indigo-500 dark:marker:text-indigo-400;
+    }
+
+    /* Citations */
+    & blockquote {
+      @apply pl-4 border-l-4 border-indigo-500 dark:border-indigo-400 italic my-4 text-gray-600 dark:text-gray-300;
+    }
+
+    /* Code */
+    & pre {
+      @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4;
+    }
+
+    & code {
+      @apply font-mono text-sm bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded;
+    }
+
+    /* Images */
+    & img {
+      @apply rounded-lg max-w-full h-auto my-4;
+    }
+
+    /* Tableaux */
+    & table {
+      @apply w-full border-collapse mb-4;
+    }
+
+    & th {
+      @apply bg-gray-100 dark:bg-gray-800 text-left p-2 border border-gray-300 dark:border-gray-700;
+    }
+
+    & td {
+      @apply p-2 border border-gray-300 dark:border-gray-700;
+    }
+
+    /* Éléments de mise en forme */
+    & strong,
+    & b {
+      @apply font-bold text-gray-900 dark:text-white;
+    }
+
+    & em,
+    & i {
+      @apply italic;
+    }
+
+    & hr {
+      @apply my-6 border-t border-gray-300 dark:border-gray-700;
+    }
+  }
+}
