@@ -148,7 +148,7 @@
 
 @layer components {
   .custom-content {
-    @apply text-black;
+    @apply text-black text-lg leading-relaxed;
 
 
     & h1 {
