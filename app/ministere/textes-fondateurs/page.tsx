@@ -13,14 +13,11 @@ export const dynamic = "force-dynamic";
 
 export default async function TextesFondateurs() {
 
-
-
-
   return (
 
     <div className="container section">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold mb-2 text-primary">Textes Fondateurs</h1>
+        <h1 className="text-3xl font-bold mb-2 text-primary">Textes fondateurs</h1>
         <h2 className="text-xl font-bold mb-2">Ministère des Finances</h2>
       </div>
       <Attributions />

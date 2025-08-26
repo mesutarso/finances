@@ -13,8 +13,8 @@ function HomeServices() {
             <div className="container section space-y-16">
                 <Heading title="Nos services" color="red" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {services?.map((service: any) => (
-                        <ServiceCard key={service.link} {...service} />
+                    {services?.map((service: any, index: number) => (
+                        <ServiceCard key={index} {...service} />
                     ))}
                 </div>
                 <div className="flex justify-center ">

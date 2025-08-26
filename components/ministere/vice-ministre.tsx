@@ -5,6 +5,7 @@ import { Card, CardContent } from '../ui/card'
 import { useQuery } from '@tanstack/react-query'
 import { viceMinistreQuery } from '@/lib/react-query/ministere/options'
 import Image from 'next/image'
+import ConstructionMode from '../maintenance/construction-mode'
 
 function ViceMinistreContent() {
     const { data } = useQuery(viceMinistreQuery);
@@ -16,6 +17,9 @@ function ViceMinistreContent() {
         instagram: <FaInstagram className="text-3xl" />,
         wikipedia: <FaWikipediaW className="text-3xl" />,
     };
+    if (!data?.noms) {
+        return <ConstructionMode />
+    }
     return (
         <div className="container section">
             <div className="mb-8 text-center">

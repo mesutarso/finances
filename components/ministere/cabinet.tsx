@@ -8,8 +8,8 @@ function CabinetContent() {
     return (
         <div>
             <CabinetSection title="Directeur de Cabinet" members={[data?.dircab]} level="primary" />
-            <CabinetSection title="Directrice de Cabinet Adjointe" members={data?.dircaba} level="secondary" />
-            <CabinetSection title="Coordonnateurs" members={data?.coordonnateurs} level="tertiary" type="double" />
+            {data?.dircaba[0]?.noms && <CabinetSection title="Directrice de Cabinet Adjointe" members={data?.dircaba} level="secondary" />}
+            <CabinetSection title="Coordonnateur" members={data?.coordonnateurs} level="tertiary" type="double" />
 
         </div>
     )

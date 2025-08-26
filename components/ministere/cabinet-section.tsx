@@ -36,7 +36,7 @@ export function CabinetSection({ title, members, level, className = "", type = '
         <section className={`rounded-lg py-8 px-6 mb-4 ${className}`}>
             <h2 className="text-2xl font-semibold mb-8 text-center">{title}</h2>
             <motion.div
-                className={`  mx-auto ${type === 'double' ? 'grid grid-cols-2 gap-16 max-w-2xl' : 'max-w-sm min-h-[300px]'}`}
+                className={`  mx-auto ${type === 'double' ? 'flex flex-wrap items-center justify-center gap-16 max-w-2xl' : 'max-w-sm min-h-[300px]'}`}
                 variants={container}
                 initial="hidden"
                 animate="show"
@@ -65,7 +65,7 @@ function MemberCard({ name, role, image, level }: MemberCardProps) {
             whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
         >
-            <Card className={`overflow-hidden h-[450px] border border-neutral-50 p-0 shadow-lg `}>
+            <Card className={`overflow-hidden h-[450px] w-[300px] mx-auto border border-neutral-50 p-0 shadow-lg`}>
                 <div className="relative h-[80%] w-full">
                     <Image src={image || "/placeholder.svg"} alt={name} fill className="object-cover w-full" />
                 </div>
