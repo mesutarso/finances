@@ -51,7 +51,7 @@ function ViceMinistreContent() {
                         </div>
                     </div>
 
-                    <div className="leading-relaxed text-foreground text-justify">
+                    <div className="leading-relaxed text-foreground text-justify w-full">
                         <h2 className="text-2xl font-bold mb-4">Biographie</h2>
                         <div dangerouslySetInnerHTML={{ __html: data?.biographie }} />
                     </div>
