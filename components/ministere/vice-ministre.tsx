@@ -102,11 +102,11 @@ function ViceMinistreContent() {
                             dangerouslySetInnerHTML={{
                                 __html: showFullBiography
                                     ? data?.biographie
-                                    : truncateHTML(data?.biographie || '', 790)
+                                    : truncateHTML(data?.biographie || '', 1000)
                             }}
                         />
 
-                        {data?.biographie && data.biographie.replace(/<[^>]*>/g, '').length > 790 && (
+                        {data?.biographie && data.biographie.replace(/<[^>]*>/g, '').length > 1000 && (
                             <div className="mt-6 text-center">
                                 <Button
                                     onClick={() => setShowFullBiography(!showFullBiography)}
