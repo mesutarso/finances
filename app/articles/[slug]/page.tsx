@@ -30,7 +30,7 @@ export async function generateMetadata(
             name: post.author,
         },
         openGraph: {
-            images: post.image,
+            images: post.image as string,
             url: post.url,
             publishedTime: post.publishedTime,
             title: post.title,
@@ -43,7 +43,7 @@ export async function generateMetadata(
             card: "summary_large_image",
             title: post.title,
             description: post.description,
-            images: post.image,
+            images: post.image as string,
             site: "@financesRDC",
         },
     }
