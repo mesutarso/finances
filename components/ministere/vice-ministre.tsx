@@ -21,18 +21,13 @@ function ViceMinistreContent() {
         wikipedia: <FaWikipediaW className="text-3xl" />,
     };
 
-    // Fonction pour tronquer le texte HTML
     const truncateHTML = (html: string, maxLength: number = 300) => {
-        // Supprimer les balises HTML pour compter les caractères
         const textOnly = html.replace(/<[^>]*>/g, '');
         if (textOnly.length <= maxLength) return html;
 
-        // Trouver la position de coupure en évitant de couper au milieu d'une balise
         const truncated = textOnly.substring(0, maxLength);
         const lastSpace = truncated.lastIndexOf(' ');
         const actualLength = lastSpace > 0 ? lastSpace : maxLength;
-
-        // Reconstruire le HTML tronqué
         let charCount = 0;
         let result = '';
         let inTag = false;
