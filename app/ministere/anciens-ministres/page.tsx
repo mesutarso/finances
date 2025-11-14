@@ -5,7 +5,7 @@ import { getQueryClient } from "@/components/providers/react-query/client";
 import AnciensMinistresContent from "@/components/ministere/anciens-ministres";
 import { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+
 
 export const metadata: Metadata = {
     title: "Anciens Ministres des Finances",

@@ -46,16 +46,28 @@ export const MENU = [
     href: "/services",
   },
   {
-    label: "Ressources",
-    href: "/ressources",
+    label: "Communiqués",
+    href: "/communiques",
+  },
+  {
+    label: "Publications",
+    href: "/publications",
     submenus: [
       {
-        label: "Documents",
-        href: "/ressources",
+        label: "Rapports annuels",
+        href: "/publications?categorie=rapports-annuels",
+      },
+      {
+        label: "Autres documents",
+        href: "/publications?categorie=documents",
+      },
+      {
+        label: "Statistiques",
+        href: "/publications?categorie=statistiques",
       },
       {
         label: "Photos et vidéos",
-        href: "/ressources/photos-et-videos",
+        href: "/publications/photos-et-videos",
       },
     ],
   },
@@ -73,11 +85,11 @@ export const MENU = [
       },
       {
         label: "Communiqués",
-        href: "/marche-des-titres?categorie=communiques",
+        href: "/marche-des-titres?categorie=communiques-marche-de-titres",
       },
       {
         label: "Autres Publications",
-        href: "/marche-des-titres?categorie=autres-publications",
+        href: "/marche-des-titres?categorie=autres-publications-marches-des-titres",
       },
     ],
   },

@@ -2,7 +2,7 @@ import { strapi } from "@strapi/client";
 
 const client = strapi({
   baseURL: process.env.API_URL!,
-  auth: process.env.NEXT_PUBLIC_TOKEN,
+  auth: process.env.API_TOKEN,
 });
 
 const articles = client.collection("articles");

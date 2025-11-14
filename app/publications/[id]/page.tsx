@@ -9,8 +9,6 @@ type RessourcePageDetailsProps = {
 }
 
 
-
-
 export default async function RessourcePageDetails({ params }: RessourcePageDetailsProps) {
     const { id } = await params
     const document = await fetchDocument(id)

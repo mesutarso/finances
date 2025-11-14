@@ -5,7 +5,7 @@ import { getQueryClient } from "@/components/providers/react-query/client";
 import ServicesContent from "@/components/home/services/content";
 import { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+
 
 export const metadata: Metadata = {
     title: "Services | Ministère des Finances",

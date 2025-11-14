@@ -3,7 +3,11 @@ import Useful from "./usefuls"
 import Line from "../shared/line"
 import Institutionnels from "./institutionnels"
 import Newsletter from "./newsletter"
-function Footer() {
+import { cacheLife } from "next/cache"
+
+async function Footer() {
+    'use cache'
+    cacheLife('weeks')
     return (
         <>
             <Line />
