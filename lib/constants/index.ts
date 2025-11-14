@@ -84,11 +84,11 @@ export const MENU = [
         href: "/marche-des-titres?categorie=annonces-et-resultats",
       },
       {
-        label: "Communiqués",
+        label: "Communiqués sur le titre",
         href: "/marche-des-titres?categorie=communiques-marche-de-titres",
       },
       {
-        label: "Autres Publications",
+        label: "Autres Publications et vidéos",
         href: "/marche-des-titres?categorie=autres-publications-marches-des-titres",
       },
     ],
