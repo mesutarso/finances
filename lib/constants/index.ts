@@ -59,7 +59,7 @@ export const MENU = [
       },
       {
         label: "Autres documents",
-        href: "/publications?categorie=documents",
+        href: "/publications?categorie=autres-publications",
       },
       {
         label: "Statistiques",

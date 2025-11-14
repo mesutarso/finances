@@ -22,6 +22,13 @@ export function formatCategorie(categorie: string): string {
     "annonces-et-resultats": "Annonces et résultats",
     communiques: "Communiqués",
     "autres-publications": "Autres publications",
+    documents: "Documents",
+    "rapports-annuels": "Rapports annuels",
+    statistiques: "Statistiques",
+    "photos-et-videos": "Photos et vidéos",
+    "communiques-marche-de-titres": "Communiqués - Marché des titres",
+    "autres-publications-marches-des-titres":
+      "Autres publications - Marché des titres",
   };
 
   return data[categorie as keyof typeof data] || categorie;

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: "Cabinet du Ministre des Finances",
 }
 
-export const revalidate = 3600;
+
 
 export default async function Cabinet() {
     const queryClient = getQueryClient();

@@ -28,7 +28,7 @@ export default async function Ressources({ searchParams }: Props) {
                 <h1 className="text-3xl font-bold mb-2 text-primary capitalize">{titleCategorie}</h1>
                 <h2 className="text-xl font-bold mb-2">Ministère des Finances</h2>
             </div>
-            <DocumentsDataTable categorie={formatedCategorie} />
+            <DocumentsDataTable categorie={categorie} showFilters={false} />
         </div>
     )
 }

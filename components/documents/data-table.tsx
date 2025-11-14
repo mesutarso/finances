@@ -12,22 +12,28 @@ import { Button } from "@/components/ui/button"
 import { SearchIcon, FilterIcon } from "lucide-react"
 import type { DocumentFilters } from "@/types/documents"
 
-export function DocumentsDataTable({ categorie }: { categorie: string }) {
+export function DocumentsDataTable({
+    categorie,
+    showFilters = true
+}: {
+    categorie: string | string[] | undefined
+    showFilters?: boolean
+}) {
     const [page, setPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
     const [search, setSearch] = useState("")
     const [filters, setFilters] = useState<DocumentFilters>({
-        type: categorie ? categorie : categorie === "Autres publications" ? null : null,
+        type: categorie ? categorie.toString() : null,
         category: null,
         dateFrom: null,
         dateTo: null,
     })
-    const [showFilters, setShowFilters] = useState(false)
+    const [showFiltersPanel, setShowFiltersPanel] = useState(false)
 
     useEffect(() => {
         setFilters(prevFilters => ({
             ...prevFilters,
-            type: categorie ? categorie : categorie === "Autres publications" ? null : null
+            type: categorie ? categorie.toString() : null
         }));
         setPage(1);
     }, [categorie]);
@@ -59,18 +65,20 @@ export function DocumentsDataTable({ categorie }: { categorie: string }) {
                     <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                     <Input placeholder="Rechercher par titre..." value={search} onChange={handleSearchChange} className="pl-8" />
                 </div>
-                <Button
-                    size="lg"
-                    variant="outline"
-                    onClick={() => setShowFilters(!showFilters)}
-                    className="w-full sm:w-auto flex items-center gap-2 capitalize"
-                >
-                    <FilterIcon className="h-4 w-4" />
-                    Filtres
-                </Button>
+                {showFilters && (
+                    <Button
+                        size="lg"
+                        variant="outline"
+                        onClick={() => setShowFiltersPanel(!showFiltersPanel)}
+                        className="w-full sm:w-auto flex items-center gap-2 capitalize"
+                    >
+                        <FilterIcon className="h-4 w-4" />
+                        Filtres
+                    </Button>
+                )}
             </div>
 
-            {showFilters && <DocumentFilterForm filters={filters} onFiltersChange={handleFiltersChange} />}
+            {showFilters && showFiltersPanel && <DocumentFilterForm filters={filters} onFiltersChange={handleFiltersChange} />}
 
             <div className="rounded-md border">
                 <DocumentsTable data={documents} isLoading={isLoading} isError={isError} />

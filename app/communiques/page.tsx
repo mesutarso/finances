@@ -1,4 +1,4 @@
-import { CommuniquesList } from "@/components/communiques/list"
+import { CommuniquesTabs } from "@/components/communiques/tabs"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function Communiques() {
                 <h1 className="text-3xl font-bold mb-2 text-primary">Communiqués</h1>
                 <h2 className="text-xl font-bold mb-2">Ministère des Finances</h2>
             </div>
-            <CommuniquesList />
+            <CommuniquesTabs />
         </div>
     )
 }
