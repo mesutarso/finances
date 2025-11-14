@@ -22,7 +22,7 @@ interface EventCardProps {
 
 export function EventCard({ event }: EventCardProps) {
     return (
-        <Link href={`/ressources/photos-et-videos/${event.slug}`} legacyBehavior passHref className="cursor-pointer">
+        <Link href={`/publications/photos-et-videos/${event.slug}`} legacyBehavior passHref className="cursor-pointer">
             <Card className="overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow pt-0">
                 <div className="relative h-60 w-full">
                     <Image

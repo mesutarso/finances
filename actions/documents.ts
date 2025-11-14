@@ -123,8 +123,8 @@ export const fetchDocument = async (id: string) => {
     id: data.documentId,
     titre: data.titre,
     fichier: `${process.env.IMAGE_URL}${data.fichier?.url}` || data.url,
-    type: data.types[0]?.titre,
-    categories: data.types[0]["categorie_document"]?.nom,
+    type: data.types?.[0]?.titre,
+    categories: data.types?.[0]?.categorie_document?.nom,
     date_publication: data.date_publication,
   };
 };
@@ -145,4 +145,22 @@ export const fetchLatestDocuments = async () => {
     }),
     url: `${process.env.IMAGE_URL}${item.fichier?.url}`,
   }));
+};
+
+/**
+ * Récupère les IDs des 125 derniers documents pour generateStaticParams
+ */
+export const getDocumentIds = async () => {
+  const { data } = await ressources.find({
+    sort: ["date_publication:desc"],
+    fields: ["documentId"],
+    pagination: {
+      pageSize: 125,
+    },
+  });
+  return (
+    data?.map((item: any) => ({
+      id: item.documentId,
+    })) || []
+  );
 };

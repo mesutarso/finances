@@ -38,7 +38,7 @@ const ResultItem = memo(
     }) => {
         const Icon = type === "article" ? Book : File
         const href =
-            type === "article" ? `/articles/${result.link}` : type === "document" ? `/ressources/${result.link}` : result.link
+            type === "article" ? `/articles/${result.link}` : type === "document" ? `/publications/${result.link}` : result.link
 
         return (
             <li className="group flex items-center gap-2 rounded-md px-3 py-2 hover:bg-muted transition-colors duration-150">

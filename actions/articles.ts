@@ -30,7 +30,6 @@ export const getArticleBySlug = async (slug: string) => {
     populate: ["categories", "image"],
   });
   const { data } = article;
-  console.log(data.titre);
   if (data?.categories?.length > 0) {
     const getSimilarArticles = await articles.find({
       populate: ["image", "categories"],
@@ -134,18 +133,20 @@ export const getAllArticles = async ({
   };
 };
 
+/**
+ * Récupère les slugs des 125 derniers articles pour generateStaticParams
+ */
 export const getArticleSlugs = async () => {
-  const slugs = await articles.find({
+  const { data } = await articles.find({
+    sort: ["date_publication:desc"],
     fields: ["slug"],
     pagination: {
-      page: 1,
-      pageSize: 50,
+      pageSize: 125,
     },
   });
-  return slugs?.data?.map((item: any) => {
-    return {
+  return (
+    data?.map((item: any) => ({
       slug: item.slug,
-      date: new Date(),
-    };
-  });
+    })) || []
+  );
 };

@@ -44,3 +44,18 @@ export async function getMediathequeBySlug(slug: string) {
     date: format(new Date(mediatheque.date), "dd MMMM yyyy", { locale: fr }),
   };
 }
+
+export async function getMediathequeSlugs() {
+  const { data } = await mediatheques.find({
+    sort: ["date:desc"],
+    fields: ["slug"],
+    pagination: {
+      pageSize: 125,
+    },
+  });
+  return (
+    data?.map((item: any) => ({
+      slug: item.slug,
+    })) || []
+  );
+}

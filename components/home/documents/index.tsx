@@ -37,7 +37,7 @@ function HomeDocuments() {
                     )}
                 </div>
                 <div className="flex justify-center">
-                    <Link href="/ressources">
+                    <Link href="/publications">
                         <Button className="relative w-fit bg-yellow text-primary px-8 py-4 overflow-hidden group border border-neutral-50 hover:shadow-md">
                             <span className="absolute cursor-pointer w-0 h-full bg-white left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                             <span className="relative cursor-pointer font-semibold z-10 transition-colors duration-500 ease-in-out group-hover:text-primary">

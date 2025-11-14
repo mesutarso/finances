@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Share2, Download } from "lucide-react"
-import PdfViewer from "./pdf-viewer"
+import dynamic from "next/dynamic"
+
+const PdfViewer = dynamic(() => import("./pdf-viewer"), {
+    ssr: false,
+})
 
 export default function DocumentDetails({ document }: { document: any }) {
     function formatDate(dateString: string) {

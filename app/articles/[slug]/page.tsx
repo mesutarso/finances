@@ -1,10 +1,8 @@
 import type { Metadata, ResolvingMetadata } from 'next'
-import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import { articleBySlugQuery } from "@/lib/react-query/articles/options";
-import { getArticleMetadata } from "@/actions/articles";
-import { getQueryClient } from "@/components/providers/react-query/client";
-import PostDetails from "@/components/home/posts/details";
-import { notFound } from "next/navigation";
+import { getArticleMetadata, getArticleSlugs } from "@/actions/articles";
+import PostDetailsClient from "@/components/home/posts/details-client";
+import { Suspense } from 'react';
+import { cacheLife } from 'next/cache';
 
 type ArticleDetailProps = {
     params: Promise<{
@@ -13,14 +11,20 @@ type ArticleDetailProps = {
 }
 
 
+export async function generateStaticParams() {
+    const articles = await getArticleSlugs()
+    return articles.map((article) => ({
+        slug: article.slug,
+    }))
+}
 
 export async function generateMetadata(
     { params }: ArticleDetailProps,
     parent: ResolvingMetadata
 ): Promise<Metadata> {
+    'use cache'
+    cacheLife('minutes')
     const slug = (await params).slug
-
-
     const post = await getArticleMetadata(slug)
 
     return {
@@ -49,21 +53,14 @@ export async function generateMetadata(
     }
 }
 
-async function ArticleDetail({ params }: ArticleDetailProps) {
+export default async function ArticleDetail({ params }: ArticleDetailProps) {
     const { slug } = await params;
-    if (!slug) {
-        notFound()
-    }
-    const queryClient = getQueryClient();
-    await queryClient.prefetchQuery(articleBySlugQuery(slug));
-    const dehydratedState = dehydrate(queryClient);
+
     return (
         <div className="container section">
-            <HydrationBoundary state={dehydratedState}>
-                <PostDetails slug={slug} />
-            </HydrationBoundary>
+            <Suspense fallback={<div className="container section">Chargement de l'article...</div>}>
+                <PostDetailsClient slug={slug} />
+            </Suspense>
         </div>
     )
 }
-
-export default ArticleDetail

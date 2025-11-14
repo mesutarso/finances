@@ -99,7 +99,7 @@ export function DocumentsTable({
                         )}
                         {document && (
                             <Link
-                                href={`/ressources/${document?.id}`}
+                                href={`/publications/${document?.id}`}
                                 className="inline-flex items-center justify-center h-8 w-8 rounded-md border text-muted-foreground hover:bg-muted"
                             >
                                 <ExternalLinkIcon className="h-4 w-4" />

@@ -34,7 +34,7 @@ export function EventDetail({ event }: EventDetailProps) {
         <div className="space-y-8">
 
             <div className="flex items-center justify-between gap-4">
-                <Link href="/ressources/photos-et-videos">
+                <Link href="/publications/photos-et-videos">
                     <Button variant="outline" size="icon">
                         <ArrowLeft className="h-4 w-4" />
                         <span className="sr-only">Retour</span>

@@ -1,7 +1,5 @@
-import { getMediathequeBySlug } from "@/actions/mediatheques"
-
-import { EventDetail } from "@/components/medias/event-detail"
-
+import { getMediathequeSlugs } from "@/actions/mediatheques"
+import EventDetailClient from "@/components/medias/event-detail-client"
 
 type MediathequePageDetailProps = {
     params: Promise<{
@@ -9,16 +7,19 @@ type MediathequePageDetailProps = {
     }>
 }
 
-async function MediathequePageDetail({ params }: MediathequePageDetailProps) {
+export async function generateStaticParams() {
+    const mediatheques = await getMediathequeSlugs()
+    return mediatheques.map((mediatheque) => ({
+        slug: mediatheque.slug,
+    }))
+}
+
+export default async function MediathequePageDetail({ params }: MediathequePageDetailProps) {
     const { slug } = await params
-    const mediatheque = await getMediathequeBySlug(slug)
+
     return (
         <div className="container section">
-
-            {/* @ts-ignore */}
-            <EventDetail event={mediatheque} />
+            <EventDetailClient slug={slug} />
         </div>
     )
 }
-
-export default MediathequePageDetail

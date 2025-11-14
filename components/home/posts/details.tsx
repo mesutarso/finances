@@ -3,7 +3,6 @@ import { CalendarIcon, ClockIcon, TagIcon, User } from "lucide-react"
 import Image from "next/image"
 import { useQuery } from '@tanstack/react-query'
 import { articleBySlugQuery } from "@/lib/react-query/articles/options"
-import { notFound } from "next/navigation"
 import ShareButtons from "@/components/shared/share-buttons"
 import PostCard from "@/components/home/posts/card"
 
@@ -14,7 +13,7 @@ type PostDetailsProps = {
 function PostDetails({ slug }: PostDetailsProps) {
     const { data } = useQuery(articleBySlugQuery(slug))
     if (!data) {
-        notFound()
+        return null
     }
     const url = `${process.env.NEXT_PUBLIC_APP_URL}/articles/${data?.link}`
     return (

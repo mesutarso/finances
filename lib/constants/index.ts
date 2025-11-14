@@ -126,7 +126,7 @@ export const USEFULSLINKS = [
   },
   {
     label: "Marché des titres",
-    href: "/ressources",
+    href: "/publications",
   },
   {
     label: "Contact",

@@ -31,7 +31,7 @@ export default function PdfCard({ id, title, dateAdded, url, description }: PdfC
 
             <CardFooter className="flex justify-between pt-2">
                 <Button variant="outline" size="sm" asChild className="relative overflow-hidden border-primary text-primary capitalize text-sm font-medium px-2 py-2 group">
-                    <Link href={`/ressources/${id}`} >
+                    <Link href={`/publications/${id}`} >
                         <span className="absolute w-0 h-full bg-primary left-0 top-0 transition-all duration-500 ease-in-out group-hover:w-full"></span>
                         <span className="relative z-10 flex items-center transition-colors duration-500 ease-in-out group-hover:text-white">
                             <Eye className="mr-2 h-4 w-4" />
