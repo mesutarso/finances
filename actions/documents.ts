@@ -68,8 +68,8 @@ export const fetchDocuments = async ({
     queryParams.filters = {
       ...(queryParams.filters || {}),
       types: {
-        titre: {
-          $in: filters.type,
+        slug: {
+          $eq: filters.type,
         },
       },
     };
