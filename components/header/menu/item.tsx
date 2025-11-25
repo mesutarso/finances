@@ -47,7 +47,7 @@ export function MenuItem({ label, href, subMenu }: { label: string, href: string
                 <AnimatePresence>
                     <DropdownMenuContent
                         align="start"
-                        className="w-56"
+                        className="w-64"
                         asChild
                     >
                         <motion.div
