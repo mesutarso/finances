@@ -48,7 +48,7 @@ export const arcjetBase = arcjet({
         "CATEGORY:SEARCH_ENGINE", // Google, Bing, etc.
         // Ajoutez d'autres catégories si nécessaire
         // "CATEGORY:MONITOR", // Services de monitoring
-        // "CATEGORY:PREVIEW", // Link previews (Slack, Discord, etc.)
+        "CATEGORY:PREVIEW", // Link previews (Slack, Discord, etc.)
       ],
     }),
   ],
