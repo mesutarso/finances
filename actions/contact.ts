@@ -5,13 +5,38 @@ import {
   type ContactFormData,
 } from "@/lib/validations/contact";
 import { Resend } from "resend";
+import { validateOrigin } from "@/lib/security/server-action-wrapper";
+import { createFormProtection } from "@/lib/arcjet";
+import { protectServerAction } from "@/lib/security/arcjet-helpers";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const sendMessageContact = async (
+// Protection Arcjet spécifique pour le formulaire de contact
+// Utilise createFormProtection qui ajoute rate limiting et bot detection
+const contactProtection = createFormProtection({
+  maxRequests: 5, // 5 requêtes par minute
+  window: "1m",
+});
+
+// Fonction interne non protégée
+const _sendMessageContact = async (
   prevState: any,
   formData: FormData
 ): Promise<any> => {
+  // Protéger avec Arcjet
+  const arcjetResult = await protectServerAction(contactProtection);
+  if (arcjetResult.error) {
+    return arcjetResult.error;
+  }
+
+  // Valider l'origine de la requête
+  const isValidOrigin = await validateOrigin();
+  if (!isValidOrigin) {
+    return {
+      success: false,
+      error: "Requête non autorisée",
+    };
+  }
   const rawData = Object.fromEntries(formData);
   const {
     success,
@@ -59,3 +84,6 @@ export const sendMessageContact = async (
     };
   }
 };
+
+// Exporter la fonction (déjà protégée avec Arcjet dans _sendMessageContact)
+export const sendMessageContact = _sendMessageContact;
