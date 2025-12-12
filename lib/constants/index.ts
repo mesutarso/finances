@@ -84,13 +84,18 @@ export const MENU = [
         href: "/marche-des-titres?categorie=annonces-et-resultats",
       },
       {
-        label: "Communiqués",
+        label: "Communiqués sur les titres",
         href: "/marche-des-titres?categorie=communiques-marche-de-titres",
       },
       {
-        label: "Autres Publications",
+        label: "Bulletins et Autres Publications",
         href: "/marche-des-titres?categorie=autres-publications-marches-des-titres",
       },
+      {
+        label: "Videos sur le marché des titres",
+        href: "/marche-des-titres/videos",
+      },
+
     ],
   },
 
