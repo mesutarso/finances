@@ -22,7 +22,7 @@ export async function proxy(request: NextRequest) {
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${
       isDev ? "'unsafe-eval'" : ""
     } https://www.googletagmanager.com;
-    style-src 'self' ${isDev ? "'unsafe-inline'" : `'nonce-${nonce}'`};
+    style-src 'self' ${isDev ? "'unsafe-inline'" : `'nonce-${nonce}' 'unsafe-hashes'`};
     img-src 'self' blob: data: https: https://maj.finances.gouv.cd;
     font-src 'self' data:;
     connect-src 'self' https://maj.finances.gouv.cd;
