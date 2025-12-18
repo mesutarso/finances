@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  
   experimental: {
     viewTransition: true,
   },
@@ -22,13 +22,11 @@ const nextConfig: NextConfig = {
     const isProduction = process.env.NODE_ENV === "production";
     const isDev = !isProduction;
 
-    // Configuration CSP adaptée selon l'environnement
-    // Note: 'unsafe-hashes' est nécessaire pour les attributs style inline (utilisés par Next.js Image)
-    // 'https:' dans img-src permet toutes les images HTTPS (nécessaire pour Next.js Image optimization)
+   
 
     return [
       {
-        // Appliquer les headers à toutes les routes
+        
         source: "/:path*",
         headers: [
           {
