@@ -1,26 +1,20 @@
 "use client"
 
-import type React from "react"
 import { sendMessageContact } from "@/actions/contact"
 import { useState, useEffect, useRef, useActionState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Send, CheckCircle, AlertCircle } from "lucide-react"
+import { Send, CheckCircle } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-
-
-
-
-function errorMessage(error: any, name: string, message: string) {
-    return error.find((err: any) => err.path === name) && message
-}
+import FormGuardFields from "@/components/security/form-guard-fields"
 
 export default function ContactForm() {
     const [state, formAction, isPending] = useActionState(sendMessageContact, undefined)
 
     const [dialogOpen, setDialogOpen] = useState(false)
+    const [csrfReady, setCsrfReady] = useState(false)
     const timerRef = useRef<NodeJS.Timeout | null>(null)
 
 
@@ -50,6 +44,7 @@ export default function ContactForm() {
 
             <h2 className="text-2xl font-semibold mb-6 text-gray-900">Formulaire de contact</h2>
             <form action={formAction} className="space-y-5">
+                <FormGuardFields honeypotName="societe" onTokenChange={(token) => setCsrfReady(Boolean(token))} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
@@ -60,6 +55,9 @@ export default function ContactForm() {
                             id="nom"
                             name="nom"
                             placeholder="Votre nom"
+                            autoComplete="family-name"
+                            maxLength={100}
+                            required
                             className="border-gray-200 focus:border-primary focus:ring-primary"
 
                         />
@@ -76,6 +74,9 @@ export default function ContactForm() {
                             id="prenom"
                             name="prenom"
                             placeholder="Votre prénom"
+                            autoComplete="given-name"
+                            maxLength={100}
+                            required
                             className="border-gray-200 focus:border-primary focus:ring-primary"
 
                         />
@@ -95,8 +96,10 @@ export default function ContactForm() {
                             id="email"
                             name="email"
                             type="email"
-
                             placeholder="votre.email@exemple.com"
+                            autoComplete="email"
+                            maxLength={254}
+                            required
                             className="border-gray-200 focus:border-primary focus:ring-primary"
 
                         />
@@ -112,8 +115,9 @@ export default function ContactForm() {
                             id="telephone"
                             name="telephone"
                             type="tel"
-
                             placeholder="Votre numéro de téléphone"
+                            autoComplete="tel"
+                            maxLength={20}
                             className="border-gray-200 focus:border-primary focus:ring-primary"
 
                         />
@@ -130,8 +134,9 @@ export default function ContactForm() {
                     <Input
                         id="sujet"
                         name="sujet"
-
                         placeholder="Sujet de votre message"
+                        maxLength={150}
+                        required
                         className="border-gray-200 focus:border-primary focus:ring-primary"
 
                     />
@@ -148,8 +153,9 @@ export default function ContactForm() {
                     <Textarea
                         id="message"
                         name="message"
-
                         placeholder="Votre message..."
+                        maxLength={2000}
+                        required
                         className="min-h-[150px] border-gray-200 focus:border-primary focus:ring-primary text-lg"
 
                     />
@@ -158,8 +164,13 @@ export default function ContactForm() {
                     )}
                 </div>
 
+                {typeof state?.error === "string" && (
+                    <p className="text-sm text-red-500">{state.error}</p>
+                )}
+
                 <Button
                     type="submit"
+                    disabled={isPending || !csrfReady}
                     className="w-full bg-primary hover:bg-primary/80 text-white py-2.5"
                 >
                     <span className="flex items-center justify-center">

@@ -1,15 +1,17 @@
 'use client'
-import { useActionState } from "react"
+import { useActionState, useState } from "react"
 import { subscribeToNewsletter } from "@/actions/newsletter"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import Form from "next/form"
 import { Send } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import FormGuardFields from "@/components/security/form-guard-fields"
 
 
 function Newsletter() {
     const [state, formAction, isPending] = useActionState(subscribeToNewsletter, { success: false })
+    const [csrfReady, setCsrfReady] = useState(false)
     return (
         <div className="flex flex-col gap-4">
             <h3 className="text-xl font-bold mb-4">Newsletter</h3>
@@ -17,8 +19,9 @@ function Newsletter() {
                 Recevez les dernières actualités et les nouvelles du ministère des Finances.
             </p>
             <Form action={formAction} className="flex">
-                <Input type="email" name="email" placeholder="Veuillez saisir votre email" className="flex-4 py-2 px-4 h-12 rounded-none placeholder:text-gray-50" />
-                <Button className="flex-1 bg-yellow text-primary py-2 hover:bg-white hover:text-primary transition-all duration-300 ease-in-out placeholder:text-white" type="submit" disabled={isPending}>{isPending ? "S'abonner..." : <Send className="w-4 h-4" />}</Button>
+                <FormGuardFields honeypotName="company" onTokenChange={(token) => setCsrfReady(Boolean(token))} />
+                <Input type="email" name="email" placeholder="Veuillez saisir votre email" autoComplete="email" maxLength={254} required className="flex-4 py-2 px-4 h-12 rounded-none placeholder:text-gray-50" />
+                <Button className="flex-1 bg-yellow text-primary py-2 hover:bg-white hover:text-primary transition-all duration-300 ease-in-out placeholder:text-white" type="submit" disabled={isPending || !csrfReady}>{isPending ? "S'abonner..." : <Send className="w-4 h-4" />}</Button>
             </Form>
             {state?.success && (
                 <Alert>

@@ -107,3 +107,19 @@ export async function validateOrigin(): Promise<boolean> {
 
   return true;
 }
+
+export async function enforceServerRateLimit(
+  scope: string,
+  maxRequests: number,
+  windowMs: number
+): Promise<{ allowed: boolean; remaining: number; resetTime: number }> {
+  const headersList = await headers();
+  const request = {
+    headers: {
+      get: (name: string) => headersList.get(name),
+    },
+  } as Request;
+
+  const identifier = `${scope}:${getRateLimitIdentifier(request)}`;
+  return checkRateLimit(identifier, maxRequests, windowMs);
+}

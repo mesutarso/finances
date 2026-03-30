@@ -1,4 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { CSRF_COOKIE_NAME } from "@/lib/security/csrf-constants";
+import { generateCsrfToken } from "@/lib/security/csrf";
 
 /**
  * Middleware pour ajouter les headers de sécurité
@@ -10,6 +12,17 @@ import { NextResponse, type NextRequest } from "next/server";
  */
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next();
+
+  if (!request.cookies.get(CSRF_COOKIE_NAME)?.value) {
+    response.cookies.set({
+      name: CSRF_COOKIE_NAME,
+      value: generateCsrfToken(),
+      httpOnly: false,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
+  }
 
   // Rate limiting header personnalisé
   response.headers.set("X-RateLimit-Limit", "60");

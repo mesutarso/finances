@@ -1,10 +1,18 @@
 "use server";
+
 import { newsletter } from "@/lib/strapi";
 import { sendNewsletterEmail } from "./mail";
 import { createStrapiCollection } from "@/lib/fetch";
-import { validateOrigin } from "@/lib/security/server-action-wrapper";
+import {
+  enforceServerRateLimit,
+  validateOrigin,
+} from "@/lib/security/server-action-wrapper";
 import { createFormProtection } from "@/lib/arcjet";
 import { protectServerAction } from "@/lib/security/arcjet-helpers";
+import { newsletterSubscriptionSchema } from "@/lib/validations/newsletter";
+import { validateCsrfToken } from "@/lib/security/csrf";
+import { checkRateLimit } from "@/lib/security/rate-limit";
+import { hasFilledHoneypot } from "@/lib/security/input";
 
 export async function findNewsletterByEmail(email: string) {
   const { data } = await newsletter.find({
@@ -14,26 +22,22 @@ export async function findNewsletterByEmail(email: string) {
       },
     },
   });
-  const response = data[0];
-  return response ? true : false;
+
+  return Boolean(data[0]);
 }
 
-// Protection Arcjet spécifique pour la newsletter
-// Utilise createFormProtection qui ajoute rate limiting et bot detection
 const newsletterProtection = createFormProtection({
-  maxRequests: 3, // 3 requêtes par minute
+  maxRequests: 3,
   window: "1m",
 });
 
-// Fonction interne non protégée
-const _subscribeToNewsletter = async (prevState: any, formData: FormData) => {
-  // Protéger avec Arcjet
-  const arcjetResult = await protectServerAction(newsletterProtection);
-  if (arcjetResult.error) {
-    return arcjetResult.error;
+const NEWSLETTER_HONEYPOT_FIELD = "company";
+
+const _subscribeToNewsletter = async (_prevState: any, formData: FormData) => {
+  if (hasFilledHoneypot(formData, NEWSLETTER_HONEYPOT_FIELD)) {
+    return { success: true };
   }
 
-  // Valider l'origine de la requête
   const isValidOrigin = await validateOrigin();
   if (!isValidOrigin) {
     return {
@@ -42,33 +46,78 @@ const _subscribeToNewsletter = async (prevState: any, formData: FormData) => {
     };
   }
 
-  const email = formData.get("email");
-  if (!email) {
-    return { success: false, error: "Veuillez saisir votre email" };
+  const isValidCsrf = await validateCsrfToken(formData);
+  if (!isValidCsrf) {
+    return {
+      success: false,
+      error: "Session expirée. Veuillez actualiser la page.",
+    };
   }
 
-  // Validation basique de l'email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email as string)) {
-    return { success: false, error: "Format d'email invalide" };
+  const arcjetResult = await protectServerAction(newsletterProtection);
+  if (arcjetResult.error) {
+    return arcjetResult.error;
   }
 
-  const isSubscribed = await findNewsletterByEmail(email as string);
-  if (isSubscribed) {
-    return { success: false, error: "Vous êtes déjà abonné à la newsletter" };
+  const ipRateLimit = await enforceServerRateLimit("newsletter", 3, 60_000);
+  if (!ipRateLimit.allowed) {
+    return {
+      success: false,
+      error: "Trop de requêtes. Veuillez réessayer plus tard.",
+    };
   }
-  const response = await createStrapiCollection("newsletters", {
-    email: email as string,
+
+  const parsed = newsletterSubscriptionSchema.safeParse({
+    email: formData.get("email"),
   });
-  if (response?.data) {
-    await sendNewsletterEmail(
-      email as string,
-      "Bienvenue à la newsletter",
-      "Bienvenue à la newsletter"
-    );
+
+  if (!parsed.success) {
+    return {
+      success: false,
+      error: parsed.error.issues[0]?.message || "Adresse email invalide",
+    };
   }
-  return { success: true };
+
+  const { email } = parsed.data;
+  const emailRateLimit = checkRateLimit(
+    `newsletter:email:${email}`,
+    2,
+    10 * 60 * 1000
+  );
+
+  if (!emailRateLimit.allowed) {
+    return {
+      success: false,
+      error: "Cette adresse a déjà effectué trop de tentatives récemment.",
+    };
+  }
+
+  try {
+    const isSubscribed = await findNewsletterByEmail(email);
+    if (isSubscribed) {
+      return {
+        success: false,
+        error: "Vous êtes déjà abonné à la newsletter",
+      };
+    }
+
+    const response = await createStrapiCollection("newsletters", {
+      email,
+    });
+
+    if (response?.data) {
+      await sendNewsletterEmail(email);
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("[NEWSLETTER_SUBSCRIBE_ERROR]", error);
+    return {
+      success: false,
+      error:
+        "Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard.",
+    };
+  }
 };
 
-// Exporter la fonction (déjà protégée avec Arcjet dans _subscribeToNewsletter)
 export const subscribeToNewsletter = _subscribeToNewsletter;
